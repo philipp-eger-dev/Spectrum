@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?define Manufactor = "Philipp Eger"?>
+  <?define UpgradeGuid = "{5475bdbe-eb0c-49e7-bb71-4eca366f8591}"?>
+  <Product
+  Id="*"
+  Name="Spectrum - Searchable PDF Creator"
+  Language="1033"
+  Version="1.0.0.0"
+  Manufacturer="$(var.Manufactor)"
+  UpgradeCode="$(var.UpgradeGuid)">
+    <Package
+    InstallerVersion="200"
+    Compressed="yes"
+    Description="Tesseract UI"
+    Manufacturer="$(var.Manufactor)" />
+    <Media
+    Id="1"
+    Cabinet="media1.cab"
+    EmbedCab="yes" />
+    
+    <Property Id="ARPHELPLINK" Value="http://dotexpert.net" />
+    <Property Id="ARPCONTACT" Value="Philipp Eger" />
+    <Property Id="ARPURLINFOABOUT" Value="https://github.com/philipp-eger-dev/spectrum" />
+
+    <Upgrade Id="$(var.UpgradeGuid)">
+      <UpgradeVersion Minimum="1.0.0.0"
+                      IncludeMinimum="no"
+                      OnlyDetect="yes"
+                      Language="1033"
+                      Property="NEWPRODUCTFOUND" />
+      <UpgradeVersion Minimum="0.1.0.0"
+                      IncludeMinimum="yes"
+                      Maximum="1.0.0.0"
+                      IncludeMaximum="no"
+                      Language="1033"
+                      Property="UPGRADEFOUND" />
+      <UpgradeVersion Minimum="1.0.0.0" Maximum="99.0.0.0"
+         Property="PREVIOUSVERSIONSINSTALLED"
+         IncludeMinimum="yes" IncludeMaximum="no" />
+    </Upgrade>
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="CompanyFolder" Name="Spectrum">
+          <Directory Id="INSTALLLOCATION" Name="TesseractUIProcessing">
+            <Component Id="ProductComponent" Guid="{4A5619DF-5841-48EC-8D7C-D368718C6D1A}">
+              <File Id="MainApplicationFile" Name="$(var.TesseractUI.TargetFileName)" Source="$(var.TesseractUI.TargetPath)" KeyPath="yes">
+                <!-- Dann legen wir doch gleich noch einen Desktop Shortcut für das Projekt an. -->
+                <Shortcut Advertise="yes" Id="DesktopShortCut" Name="Spectrum - Searchable PDF Creator" Directory="DesktopFolder" WorkingDirectory="INSTALLLOCATION" Description="TesseractUI ausführen" Icon="Icon.exe">
+                  <!-- Und dieses Icon soll für den Shortcut verwendet werden -->
+                  <Icon Id="Icon.exe" SourceFile="$(var.TesseractUI.TargetPath)" />
+                </Shortcut>
+              </File>
+            </Component>
+            <Component Id="OCRComponent" Guid="{777028E8-DA56-400E-9C71-844AE328E8BF}">
+              <File Id="HOCR2PDF" Name="hOcr2Pdf.dll" Source="$(var.TesseractUI.TargetDir)hOcr2Pdf.dll" KeyPath="yes" />
+            </Component>
+            <Component Id="TextSharp" Guid="{777028E8-DA56-400E-9C51-844AE328E8BF}">
+              <File Id="ITextSharp" Name="itextsharp.dll" Source="$(var.TesseractUI.TargetDir)itextsharp.dll" KeyPath="yes" />
+            </Component>
+            <Component Id="AgilityPack" Guid="{777028E8-DA56-300E-9C71-844AE328E8BF}">
+              <File Id="HtmlAgilityPack" Name="HtmlAgilityPack.dll" Source="$(var.TesseractUI.TargetDir)HtmlAgilityPack.dll" KeyPath="yes" />
+            </Component>
+          </Directory>
+        </Directory>
+      </Directory>
+      <Directory Id="DesktopFolder" Name="Desktop" />
+    </Directory>
+
+    <Feature Id="ProductFeature" Title="Spectrum - Searchable PDF Creator" Level="1">
+      <ComponentRef Id="ProductComponent" />
+      <ComponentRef Id="OCRComponent" />
+      <ComponentRef Id="TextSharp" />
+      <ComponentRef Id="AgilityPack" />
+    </Feature>
+    <CustomAction Id="PreventDowngrading"
+                  Error="A previous version is already installed." />
+    <InstallExecuteSequence>
+      <Custom Action="PreventDowngrading"
+              After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
+      <RemoveExistingProducts After="InstallFinalize" />
+    </InstallExecuteSequence>
+    
+    <InstallUISequence>
+      <Custom Action="PreventDowngrading"
+              After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
+    </InstallUISequence>
+    
+    <WixVariable Id='WixUILicenseRtf' Overridable='yes' Value='$(var.TesseractUI.TargetDir)\LicenseAgreement.rtf'/>
+    
+    <UIRef Id="WixUI_Minimal" />
+    <UIRef Id="WixUI_ErrorProgressText" />
+  </Product>
+</Wix>
