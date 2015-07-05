@@ -151,14 +151,9 @@ namespace TesseractUI
 
                     _FilesToProcess -= 1;
 
-                    if (_FilesToProcess == 0)
-                    {
-                        TextBlock_StatusInformation.Text = "All files processed";                           
-                    }
-                    else
-                    {
-                        TextBlock_StatusInformation.Text = string.Format("{0} files to process", _FilesToProcess.ToString());
-                    }
+                    TextBlock_StatusInformation.Text = _FilesToProcess == 0 ? 
+                        "All files processed" : 
+                        string.Format("{0} files to process", _FilesToProcess.ToString());
 
                     this.ProgressBar_Main.IsIndeterminate = false;
                 }));
