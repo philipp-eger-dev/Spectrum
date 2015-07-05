@@ -42,7 +42,10 @@ namespace TesseractUI
                     }
                 }
 
-                this.RecognitionFinished(this, new RecognitionEventArgs(file));
+                if (this.RecognitionFinished != null)
+                {
+                    this.RecognitionFinished(this, new RecognitionEventArgs(file));                    
+                }
             });
 
             recognitionThread.Start();
