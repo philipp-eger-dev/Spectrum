@@ -7,6 +7,9 @@ using System.IO;
 using System.Windows.Threading;
 using System.Diagnostics;
 using System.Windows.Input;
+using System.ComponentModel;
+using System.Collections.Generic;
+using Clock.Utils;
 
 namespace TesseractUI
 {
@@ -27,6 +30,8 @@ namespace TesseractUI
 
             this.FileGridVM = new FileGridViewModel();
             this.DataContext = this.FileGridVM;
+
+            this.Closing += MainWindow_Closing;
         }
         #endregion
 
@@ -106,6 +111,18 @@ namespace TesseractUI
             };
 
             aboutWindow.ShowDialog();
+        }
+
+        private void MainWindow_Closing(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                TempData.Instance.CleanAll();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
         #endregion
 

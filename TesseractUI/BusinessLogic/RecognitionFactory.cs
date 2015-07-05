@@ -3,14 +3,12 @@ using Clock.Pdf;
 using Clock.Utils;
 using System.IO;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace TesseractUI
 {
     public class RecognitionFactory
     {
         #region Consts
-
         private const string FILENAMEEXTENSION_OCR = "_OCR";
         #endregion
 
@@ -48,6 +46,7 @@ namespace TesseractUI
                 }
             });
 
+            recognitionThread.IsBackground = true;
             recognitionThread.Start();
         }
 
