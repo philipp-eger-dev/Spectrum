@@ -84,6 +84,9 @@
       <Custom Action="PreventDowngrading"
               After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
     </InstallUISequence>
+
+    <Icon Id="icon.ico" SourceFile="$(var.TesseractUI.TargetDir)TesseractUI.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="icon.ico" />
     
     <WixVariable Id='WixUILicenseRtf' Overridable='yes' Value='$(var.TesseractUI.TargetDir)LicenseAgreement.rtf'/>
     
