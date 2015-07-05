@@ -15,6 +15,7 @@ namespace TesseractUI
         #region Fields
         private string _SelectedInputDirectory;
         private string _SelectedOutputDirectory;
+        private int _FilesToProcess;
 
         public readonly FileGridViewModel FileGridVM;
         #endregion
@@ -73,6 +74,8 @@ namespace TesseractUI
 
             if (!String.IsNullOrEmpty(this._SelectedInputDirectory) && files.Any(_ => _.Process))
             {
+                _FilesToProcess = files.Count;
+
                 ProgressBar_Main.IsIndeterminate = true;
                 RecognitionFactory recognition = new RecognitionFactory();
 
@@ -146,7 +149,17 @@ namespace TesseractUI
                         e.File.Status = ProcessingState.Complete;
                     }
 
-                    TextBlock_StatusInformation.Text = "All files processed";
+                    _FilesToProcess -= 1;
+
+                    if (_FilesToProcess == 0)
+                    {
+                        TextBlock_StatusInformation.Text = "All files processed";                           
+                    }
+                    else
+                    {
+                        TextBlock_StatusInformation.Text = string.Format("{0} files to process", _FilesToProcess.ToString());
+                    }
+
                     this.ProgressBar_Main.IsIndeterminate = false;
                 }));
         }
