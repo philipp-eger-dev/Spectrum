@@ -12,7 +12,7 @@
     <Package
     InstallerVersion="200"
     Compressed="yes"
-    Description="Tesseract UI"
+    Description="Spectrum - Searchable PDF Creator"
     Manufacturer="$(var.Manufactor)" />
     <Media
     Id="1"
@@ -46,9 +46,7 @@
           <Directory Id="INSTALLLOCATION" Name="TesseractUIProcessing">
             <Component Id="ProductComponent" Guid="{4A5619DF-5841-48EC-8D7C-D368718C6D1A}">
               <File Id="MainApplicationFile" Name="$(var.TesseractUI.TargetFileName)" Source="$(var.TesseractUI.TargetPath)" KeyPath="yes">
-                <!-- Dann legen wir doch gleich noch einen Desktop Shortcut für das Projekt an. -->
                 <Shortcut Advertise="yes" Id="DesktopShortCut" Name="Spectrum - Searchable PDF Creator" Directory="DesktopFolder" WorkingDirectory="INSTALLLOCATION" Description="TesseractUI ausführen" Icon="Icon.exe">
-                  <!-- Und dieses Icon soll für den Shortcut verwendet werden -->
                   <Icon Id="Icon.exe" SourceFile="$(var.TesseractUI.TargetPath)" />
                 </Shortcut>
               </File>
@@ -87,7 +85,7 @@
               After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
     </InstallUISequence>
     
-    <WixVariable Id='WixUILicenseRtf' Overridable='yes' Value='$(var.TesseractUI.TargetDir)\LicenseAgreement.rtf'/>
+    <WixVariable Id='WixUILicenseRtf' Overridable='yes' Value='$(var.TesseractUI.TargetDir)LicenseAgreement.rtf'/>
     
     <UIRef Id="WixUI_Minimal" />
     <UIRef Id="WixUI_ErrorProgressText" />
