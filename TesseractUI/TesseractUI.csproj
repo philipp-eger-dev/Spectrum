@@ -79,7 +79,7 @@
   <ItemGroup>
     <Reference Include="hOcr2Pdf, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\hocrtopdf-code\hocrtopdf\bin\Release\hOcr2Pdf.dll</HintPath>
+      <HintPath>Assemblies\hOcr2Pdf.dll</HintPath>
     </Reference>
     <Reference Include="itextsharp, Version=5.5.8.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\iTextSharp.5.5.8\lib\itextsharp.dll</HintPath>

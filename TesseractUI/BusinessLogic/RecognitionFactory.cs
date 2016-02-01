@@ -1,8 +1,8 @@
 ﻿using System;
 using Clock.Pdf;
-using Clock.Utils;
 using System.IO;
 using System.Threading;
+using Clock.Util;
 
 namespace TesseractUI
 {
