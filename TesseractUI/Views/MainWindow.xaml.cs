@@ -8,7 +8,6 @@ using System.Windows.Threading;
 using System.Diagnostics;
 using System.Windows.Input;
 using System.ComponentModel;
-using Clock.Util;
 
 namespace TesseractUI
 {
@@ -116,7 +115,7 @@ namespace TesseractUI
         {
             try
             {
-                TempData.Instance.CleanAll();
+                //TempData.Instance.CleanAll();
             }
             catch (Exception ex)
             {

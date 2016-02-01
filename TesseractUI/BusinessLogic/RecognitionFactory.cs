@@ -2,7 +2,7 @@
 using Clock.Pdf;
 using System.IO;
 using System.Threading;
-using Clock.Util;
+using Clock.Utils;
 
 namespace TesseractUI
 {
@@ -26,19 +26,19 @@ namespace TesseractUI
 
                 file.Status = ProcessingState.Processing;
                 string tesseractLanguageString = GetTesseractStringFromLanguageEnumeration(file.ProcessingLanguage);
+                
+                using (PDFDoc doc = PDFDoc.Open(file.FilePath))
+                {
+                    doc.Ocr(OcrMode.Tesseract, tesseractLanguageString, WriteTextMode.Word, null);
+                    sourcePDFFile = doc.ReaderPDF;
 
-                //using (PDFDoc doc = PDFDoc.Open(file.FilePath))
-                //{
-                //    doc.Ocr(OcrMode.Tesseract, tesseractLanguageString, WriteTextMode.Word, null);
-                //    sourcePDFFile = doc.ReaderPDF;
+                    outputPath = CreateFileOutputPath(file.FilePath, outputDirectory, replaceSourceFile);
 
-                //    outputPath = CreateFileOutputPath(file.FilePath, outputDirectory, replaceSourceFile);
-
-                //    if (File.Exists(sourcePDFFile))
-                //    {
-                //        File.Copy(sourcePDFFile, outputPath, true);
-                //    }
-                //}
+                    if (File.Exists(sourcePDFFile))
+                    {
+                        File.Copy(sourcePDFFile, outputPath, true);
+                    }
+                }
 
                 if (this.RecognitionFinished != null)
                 {
