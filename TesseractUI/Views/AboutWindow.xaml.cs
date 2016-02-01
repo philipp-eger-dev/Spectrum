@@ -10,7 +10,9 @@ namespace TesseractUI
         {
             InitializeComponent();
 
-            this.TxtLicense.Text = File.ReadAllText(@"G:\Development\Private\TesseractUI\TesseractUI\LicenseAgreement.rtf");
+            string licenseAgreementPath = Path.GetFullPath(@"..\..\..\LicenseAgreement.rtf");
+
+            this.TxtLicense.Text = File.ReadAllText(licenseAgreementPath);
         }
         #endregion
 
