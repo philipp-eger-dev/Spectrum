@@ -1,4 +1,5 @@
-﻿using iTextSharp.text.pdf;
+﻿using Clock.Hocr;
+using iTextSharp.text.pdf;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -26,13 +27,21 @@ namespace TesseractUI.BusinessLogic
 
             List<string> pdfImages = GetPDFImages(pdf, this._FilePath, this._OutputPath);
 
-            CreateHOCROfImage(pdfImages, tesseractLanguageString);
+            hDocument ocrDocument = CreateHOCROfImage(pdfImages, tesseractLanguageString);
+
+            foreach (hPage page in ocrDocument.Pages)
+            {
+                AddOcrContent(pdf, page, 1, 300);
+
+            }
 
             return "";
         }
 
-        private void CreateHOCROfImage(List<string> pdfImagePaths, string tesseractLanguage)
+        private hDocument CreateHOCROfImage(List<string> pdfImagePaths, string tesseractLanguage)
         {
+            hDocument documentWithHocr = new hDocument();
+
             foreach (string pdfImagePath in pdfImagePaths)
             {
                 string outputFile = pdfImagePath.Replace(Path.GetExtension(pdfImagePath), ".hocr");
@@ -40,13 +49,90 @@ namespace TesseractUI.BusinessLogic
                 string oArg = '"' + outputFile + '"';
                 string commandArgs = 
                     String.Concat(pdfImagePath, " ", oArg, " -l " + tesseractLanguage + " -psm 1 hocr ");
-                StartProcess(GetProgramPath("Tesseract-OCR", "tesseract.exe"), commandArgs);
+                StartProcess(
+                    GetProgramPath("Tesseract-OCR", "tesseract.exe"), commandArgs);
+
+                documentWithHocr.AddFile(outputFile);
             }
+
+            return documentWithHocr;
+        }
+
+        public void AddOcrContent(PdfReader r, hPage hpage, int pageNumber, int Dpi, string FontName = null)
+        {
+            var mem = new FileStream(@"D:\Test\test.pdf", FileMode.Create, FileAccess.ReadWrite);
+            // iTextSharp.text.pdf.PdfReader r = new iTextSharp.text.pdf.PdfReader(TempFile);
+            PdfStamper pdfStamper = new PdfStamper(r, mem);
+            PdfImportedPage page = pdfStamper.GetImportedPage(r, pageNumber);
+            foreach (hParagraph para in hpage.Paragraphs)
+            {
+                foreach (hLine line in para.Lines)
+                {
+                    line.AlignTops();
+
+                    foreach (hWord c in line.Words)
+                    {
+                        c.CleanText();
+
+                        BBox b = BBox.ConvertBBoxToPoints(c.BBox, Dpi);
+
+                        if (b.Height > 50)
+                            continue;
+                        PdfContentByte cb = pdfStamper.GetUnderContent(pageNumber);
+
+                        BaseFont base_font = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.WINANSI, false);
+
+                        iTextSharp.text.Font font = new iTextSharp.text.Font(base_font);
+                        if (FontName != null && FontName != string.Empty)
+                        {
+                            var fontPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), FontName);
+                            base_font = BaseFont.CreateFont(fontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+                            // BaseFont base_font = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.WINANSI, false);
+                            font = new iTextSharp.text.Font(base_font);
+                        }
+
+                        cb.BeginText();
+
+
+                        float size = 0;// Math.Round(b.Height);
+                        while (1 == 1 && size < 50)
+                        {
+                            var width = base_font.GetWidthPoint(c.Text, size);
+                            if (width < b.Width)
+                            {
+                                size += 1;
+                            }
+                            else
+                                break;
+                        }
+                        if (size < 10)
+                            size = size - 1;
+
+                        if (size == 0)
+                            size = 1;
+
+                        cb.SetFontAndSize(base_font, b.Height >= 2 ? (int)size : 2);
+                        cb.SetTextMatrix(b.Left, page.Height - b.Top - b.Height);
+                        cb.SetWordSpacing(PdfWriter.SPACE);
+
+                        cb.ShowText(c.Text + " ");
+                        cb.EndText();
+                    }
+                }
+            }
+
+
+            r.RemoveUnusedObjects();
+
+            pdfStamper.Close();
+            pdfStamper.Reader.Close();
+            mem.Close();
+            mem = null;
+            r = null;
         }
 
         protected static string GetProgramPath(string ProgramDirectoryName, string ExeName)
         {
-            //Check PATH first
             var enviromentPath = Environment.GetEnvironmentVariable("PATH");
 
             var paths = enviromentPath.Split(';');
@@ -87,9 +173,7 @@ namespace TesseractUI.BusinessLogic
             foreach (string gs in files)
                 return gs;
 
-
             return null;
-
         }
 
         protected static void StartProcess(string FileToExecute, string Arguments)
@@ -140,7 +224,7 @@ namespace TesseractUI.BusinessLogic
         {
             RandomAccessFileOrArray randomAccess = new RandomAccessFileOrArray(filePath);
 
-            string path = System.IO.Path.Combine(outputPath, String.Format(@"{0}.jpg", pageNumber));
+            string path = Path.Combine(outputPath, String.Format(@"{0}.jpg", pageNumber));
 
             try
             {
