@@ -1,8 +1,7 @@
 ﻿using System;
-using Clock.Pdf;
 using System.IO;
 using System.Threading;
-using Clock.Utils;
+using TesseractUI.BusinessLogic;
 
 namespace TesseractUI
 {
@@ -21,24 +20,12 @@ namespace TesseractUI
         {
             Thread recognitionThread = new Thread(() =>
             {
-                string sourcePDFFile = null;
-                string outputPath = null;
-
                 file.Status = ProcessingState.Processing;
                 string tesseractLanguageString = GetTesseractStringFromLanguageEnumeration(file.ProcessingLanguage);
-                
-                using (PDFDoc doc = PDFDoc.Open(file.FilePath))
-                {
-                    doc.Ocr(OcrMode.Tesseract, tesseractLanguageString, WriteTextMode.Word, null);
-                    sourcePDFFile = doc.ReaderPDF;
 
-                    outputPath = CreateFileOutputPath(file.FilePath, outputDirectory, replaceSourceFile);
+                PDFDocument document = new PDFDocument(file.FilePath);
 
-                    if (File.Exists(sourcePDFFile))
-                    {
-                        File.Copy(sourcePDFFile, outputPath, true);
-                    }
-                }
+                string pathToOCRDocument = document.Ocr(tesseractLanguageString);
 
                 if (this.RecognitionFinished != null)
                 {
