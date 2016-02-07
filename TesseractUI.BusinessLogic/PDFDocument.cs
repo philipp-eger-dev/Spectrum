@@ -1,5 +1,6 @@
 ﻿using iTextSharp.text.pdf;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -20,7 +21,13 @@ namespace TesseractUI.BusinessLogic
         public string Ocr(string tesseractLanguageString)
         {
             PdfReader pdf = new PdfReader(this._FilePath);
-            string pdfImage = GetPageImage(pdf, this._FilePath, 1, this._OutputPath);
+
+            List<string> pdfImages = new List<string>();
+
+            for (int pageNumber = 1; pageNumber < pdf.NumberOfPages; pageNumber++)
+            {
+                pdfImages.Add(GetPageImage(pdf, this._FilePath, pageNumber, this._OutputPath));
+            }
 
             return "";
         }
@@ -62,7 +69,7 @@ namespace TesseractUI.BusinessLogic
                                 PdfObject pdfObj = pdf.GetPdfObject(XrefIndex);
                                 PdfStream pdfStrem = (PdfStream)pdfObj;
                                 byte[] bytes = PdfReader.GetStreamBytesRaw((PRStream)pdfStrem);
-                                if ((bytes != null))
+                                if (bytes != null)
                                 {
                                     using (MemoryStream memStream = new MemoryStream(bytes))
                                     {
@@ -70,11 +77,12 @@ namespace TesseractUI.BusinessLogic
                                         Image img = Image.FromStream(memStream);
                                         // must save the file while stream is open.
                                         if (!Directory.Exists(outputPath))
+                                        {
                                             Directory.CreateDirectory(outputPath);
+                                        }
 
                                         EncoderParameters parms = new EncoderParameters(1);
                                         parms.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Compression, 0);
-                                        // GetImageEncoder is found below this method
                                         ImageCodecInfo jpegEncoder = GetImageEncoder("JPEG");
                                         img.Save(path, jpegEncoder, parms);
                                         break;
@@ -90,15 +98,11 @@ namespace TesseractUI.BusinessLogic
             {
                 throw;
             }
-            finally
-            {
-                pdf.Close();
-            }
 
             return outputPath;
         }
 
-        public static System.Drawing.Imaging.ImageCodecInfo GetImageEncoder(string imageType)
+        public static ImageCodecInfo GetImageEncoder(string imageType)
         {
             imageType = imageType.ToUpperInvariant();
 
