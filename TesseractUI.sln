@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesseractUI", "TesseractUI\
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "TesseractUI.Setup", "TesseractUI.Setup\TesseractUI.Setup.wixproj", "{8C16F77A-6FC8-43A0-B480-46EC4CAB8435}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hocr2pdf", "C:\Users\PhilippEger\Downloads\hocrtopdf-30741\hocrtopdf\hocr2pdf.csproj", "{4EBBF401-09E0-4F7A-A343-4659E51E9077}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesseractUI.BusinessLogic", "TesseractUI.BusinessLogic\TesseractUI.BusinessLogic.csproj", "{77CDE625-8169-4D06-AAC3-48537D3F8E03}"
 EndProject
 Global
@@ -49,22 +47,6 @@ Global
 		{8C16F77A-6FC8-43A0-B480-46EC4CAB8435}.Release|x64.ActiveCfg = Release|x86
 		{8C16F77A-6FC8-43A0-B480-46EC4CAB8435}.Release|x86.ActiveCfg = Release|x86
 		{8C16F77A-6FC8-43A0-B480-46EC4CAB8435}.Release|x86.Build.0 = Release|x86
-		{4EBBF401-09E0-4F7A-A343-4659E51E9077}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4EBBF401-09E0-4F7A-A343-4659E51E9077}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4EBBF401-09E0-4F7A-A343-4659E51E9077}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{4EBBF401-09E0-4F7A-A343-4659E51E9077}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{4EBBF401-09E0-4F7A-A343-4659E51E9077}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{4EBBF401-09E0-4F7A-A343-4659E51E9077}.Debug|x64.Build.0 = Debug|Any CPU
-		{4EBBF401-09E0-4F7A-A343-4659E51E9077}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{4EBBF401-09E0-4F7A-A343-4659E51E9077}.Debug|x86.Build.0 = Debug|Any CPU
-		{4EBBF401-09E0-4F7A-A343-4659E51E9077}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4EBBF401-09E0-4F7A-A343-4659E51E9077}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4EBBF401-09E0-4F7A-A343-4659E51E9077}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{4EBBF401-09E0-4F7A-A343-4659E51E9077}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{4EBBF401-09E0-4F7A-A343-4659E51E9077}.Release|x64.ActiveCfg = Release|Any CPU
-		{4EBBF401-09E0-4F7A-A343-4659E51E9077}.Release|x64.Build.0 = Release|Any CPU
-		{4EBBF401-09E0-4F7A-A343-4659E51E9077}.Release|x86.ActiveCfg = Release|Any CPU
-		{4EBBF401-09E0-4F7A-A343-4659E51E9077}.Release|x86.Build.0 = Release|Any CPU
 		{77CDE625-8169-4D06-AAC3-48537D3F8E03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{77CDE625-8169-4D06-AAC3-48537D3F8E03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77CDE625-8169-4D06-AAC3-48537D3F8E03}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
