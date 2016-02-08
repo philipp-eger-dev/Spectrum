@@ -21,7 +21,7 @@ namespace TesseractUI.BusinessLogic
             this._OutputPath = GenerateOutputPath();
         }
 
-        public string Ocr(string tesseractLanguageString)
+        public void Ocr(string tesseractLanguageString)
         {
             PdfReader pdf = new PdfReader(this._FilePath);
 
@@ -30,8 +30,6 @@ namespace TesseractUI.BusinessLogic
             hDocument ocrDocument = CreateHOCROfImage(pdfImages, tesseractLanguageString);
 
             AddOcrContent(pdf, ocrDocument, 300);
-
-            return "";
         }
 
         private hDocument CreateHOCROfImage(List<string> pdfImagePaths, string tesseractLanguage)
