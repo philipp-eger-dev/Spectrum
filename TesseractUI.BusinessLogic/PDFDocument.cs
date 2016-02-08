@@ -29,10 +29,7 @@ namespace TesseractUI.BusinessLogic
 
             hDocument ocrDocument = CreateHOCROfImage(pdfImages, tesseractLanguageString);
 
-            foreach (hPage page in ocrDocument.Pages)
-            {
-                AddOcrContent(pdf, page, 1, 300);
-            }
+            AddOcrContent(pdf, ocrDocument, 300);
 
             return "";
         }
@@ -46,8 +43,8 @@ namespace TesseractUI.BusinessLogic
                 string outputFile = pdfImagePath.Replace(Path.GetExtension(pdfImagePath), "");
 
                 string oArg = '"' + outputFile + '"';
-                string commandArgs = 
-                    String.Concat(pdfImagePath, " ", oArg, " -l " + tesseractLanguage + " -psm 1 hocr ");
+                string commandArgs =
+                    string.Concat(pdfImagePath, " ", oArg, " -l " + tesseractLanguage + " -psm 1 hocr ");
                 StartProcess(
                     GetProgramPath("Tesseract-OCR", "tesseract.exe"), commandArgs);
 
@@ -57,74 +54,80 @@ namespace TesseractUI.BusinessLogic
             return documentWithHocr;
         }
 
-        public void AddOcrContent(PdfReader r, hPage hpage, int pageNumber, int Dpi, string FontName = null)
+        public void AddOcrContent(PdfReader r, hDocument ocrDocument, int Dpi, string FontName = null)
         {
             var mem = new FileStream(@"D:\Test\test.pdf", FileMode.Create, FileAccess.ReadWrite);
-            // iTextSharp.text.pdf.PdfReader r = new iTextSharp.text.pdf.PdfReader(TempFile);
             PdfStamper pdfStamper = new PdfStamper(r, mem);
-            PdfImportedPage page = pdfStamper.GetImportedPage(r, pageNumber);
-            foreach (hParagraph para in hpage.Paragraphs)
+
+            int pageCounter = 1;
+            foreach (hPage hrPage in ocrDocument.Pages)
             {
-                foreach (hLine line in para.Lines)
+                PdfImportedPage page = pdfStamper.GetImportedPage(r, pageCounter);
+
+                foreach (hParagraph para in hrPage.Paragraphs)
                 {
-                    line.AlignTops();
-
-                    foreach (hWord c in line.Words)
+                    foreach (hLine line in para.Lines)
                     {
-                        c.CleanText();
+                        line.AlignTops();
 
-                        BBox b = BBox.ConvertBBoxToPoints(c.BBox, Dpi);
-
-                        if (b.Height > 50)
-                            continue;
-                        PdfContentByte cb = pdfStamper.GetUnderContent(pageNumber);
-
-                        BaseFont base_font = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.WINANSI, false);
-
-                        iTextSharp.text.Font font = new iTextSharp.text.Font(base_font);
-                        if (FontName != null && FontName != string.Empty)
+                        foreach (hWord c in line.Words)
                         {
-                            var fontPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), FontName);
-                            base_font = BaseFont.CreateFont(fontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-                            // BaseFont base_font = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.WINANSI, false);
-                            font = new iTextSharp.text.Font(base_font);
-                        }
+                            c.CleanText();
 
-                        cb.BeginText();
+                            BBox b = BBox.ConvertBBoxToPoints(c.BBox, Dpi);
 
+                            if (b.Height > 50)
+                                continue;
+                            PdfContentByte cb = pdfStamper.GetUnderContent(pageCounter);
 
-                        float size = 0;// Math.Round(b.Height);
-                        while (1 == 1 && size < 50)
-                        {
-                            var width = base_font.GetWidthPoint(c.Text, size);
-                            if (width < b.Width)
+                            BaseFont base_font = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.WINANSI, false);
+
+                            iTextSharp.text.Font font = new iTextSharp.text.Font(base_font);
+                            if (FontName != null && FontName != string.Empty)
                             {
-                                size += 1;
+                                var fontPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), FontName);
+                                base_font = BaseFont.CreateFont(fontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+                                // BaseFont base_font = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.WINANSI, false);
+                                font = new iTextSharp.text.Font(base_font);
                             }
-                            else
-                                break;
+
+                            cb.BeginText();
+
+                            float size = 0;// Math.Round(b.Height);
+                            while (1 == 1 && size < 50)
+                            {
+                                var width = base_font.GetWidthPoint(c.Text, size);
+                                if (width < b.Width)
+                                {
+                                    size += 1;
+                                }
+                                else
+                                    break;
+                            }
+                            if (size < 10)
+                                size = size - 1;
+
+                            if (size == 0)
+                                size = 1;
+
+                            cb.SetFontAndSize(base_font, b.Height >= 2 ? (int)size : 2);
+                            cb.SetTextMatrix(b.Left, page.Height - b.Top - b.Height);
+                            cb.SetWordSpacing(PdfWriter.SPACE);
+
+                            cb.ShowText(c.Text + " ");
+                            cb.EndText();
                         }
-                        if (size < 10)
-                            size = size - 1;
-
-                        if (size == 0)
-                            size = 1;
-
-                        cb.SetFontAndSize(base_font, b.Height >= 2 ? (int)size : 2);
-                        cb.SetTextMatrix(b.Left, page.Height - b.Top - b.Height);
-                        cb.SetWordSpacing(PdfWriter.SPACE);
-
-                        cb.ShowText(c.Text + " ");
-                        cb.EndText();
                     }
                 }
+
+                pageCounter++;
+
+                r.RemoveUnusedObjects();
+
+                pdfStamper.Close();
+                pdfStamper.Reader.Close();
             }
 
-
-            r.RemoveUnusedObjects();
-
-            pdfStamper.Close();
-            pdfStamper.Reader.Close();
             mem.Close();
             mem = null;
             r = null;
