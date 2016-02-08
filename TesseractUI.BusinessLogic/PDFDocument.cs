@@ -123,12 +123,13 @@ namespace TesseractUI.BusinessLogic
                 pageCounter++;
 
                 r.RemoveUnusedObjects();
-
-                pdfStamper.Close();
-                pdfStamper.Reader.Close();
             }
 
+
+            pdfStamper.Close();
+            pdfStamper.Reader.Close();
             mem.Close();
+
             mem = null;
             r = null;
         }
