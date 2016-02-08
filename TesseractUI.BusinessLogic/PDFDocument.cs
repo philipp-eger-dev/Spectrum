@@ -32,7 +32,6 @@ namespace TesseractUI.BusinessLogic
             foreach (hPage page in ocrDocument.Pages)
             {
                 AddOcrContent(pdf, page, 1, 300);
-
             }
 
             return "";
@@ -44,7 +43,7 @@ namespace TesseractUI.BusinessLogic
 
             foreach (string pdfImagePath in pdfImagePaths)
             {
-                string outputFile = pdfImagePath.Replace(Path.GetExtension(pdfImagePath), ".hocr");
+                string outputFile = pdfImagePath.Replace(Path.GetExtension(pdfImagePath), "");
 
                 string oArg = '"' + outputFile + '"';
                 string commandArgs = 
@@ -52,7 +51,7 @@ namespace TesseractUI.BusinessLogic
                 StartProcess(
                     GetProgramPath("Tesseract-OCR", "tesseract.exe"), commandArgs);
 
-                documentWithHocr.AddFile(outputFile);
+                documentWithHocr.AddFile(outputFile + ".hocr");
             }
 
             return documentWithHocr;
