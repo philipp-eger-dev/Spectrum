@@ -50,16 +50,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BBox.cs" />
-    <Compile Include="hChar.cs" />
-    <Compile Include="hDocument.cs" />
-    <Compile Include="hLine.cs" />
-    <Compile Include="hOcrClass.cs" />
-    <Compile Include="hPage.cs" />
-    <Compile Include="hParagraph.cs" />
-    <Compile Include="hWord.cs" />
+    <Compile Include="HOCR\BBox.cs" />
+    <Compile Include="FileSystem\FileSystemAccess.cs" />
+    <Compile Include="FileSystem\IFileSystem.cs" />
+    <Compile Include="HOCR\hChar.cs" />
+    <Compile Include="HOCR\hDocument.cs" />
+    <Compile Include="HOCR\hLine.cs" />
+    <Compile Include="HOCR\hOcrClass.cs" />
+    <Compile Include="HOCR\HOCRFileCreator.cs" />
+    <Compile Include="HOCR\hPage.cs" />
+    <Compile Include="HOCR\hParagraph.cs" />
+    <Compile Include="HOCR\hWord.cs" />
+    <Compile Include="Images\PDFImage.cs" />
+    <Compile Include="Images\PDFImageGenerator.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="PDFDocument.cs" />
+    <Compile Include="ProcessAccess\ProcessStarter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

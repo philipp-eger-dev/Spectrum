@@ -25,7 +25,7 @@ namespace TesseractUI
 
                 PDFDocument document = new PDFDocument(file.FilePath);
 
-                string pathToOCRDocument = document.Ocr(tesseractLanguageString);
+                document.Ocr(tesseractLanguageString);
 
                 if (this.RecognitionFinished != null)
                 {
