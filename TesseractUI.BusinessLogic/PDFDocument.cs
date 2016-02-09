@@ -7,6 +7,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using TesseractUI.BusinessLogic.FileSystem;
 using TesseractUI.BusinessLogic.HOCR;
+using TesseractUI.BusinessLogic.Images;
 
 namespace TesseractUI.BusinessLogic
 {
@@ -24,9 +25,9 @@ namespace TesseractUI.BusinessLogic
             IFileSystem fileSystem = new FileSystemAccess(this._FilePath);
 
             PdfReader pdf = new PdfReader(this._FilePath);
+            PDFImageGenerator imageGenerator = new PDFImageGenerator(fileSystem);
 
-            List<string> pdfImages = GetPDFImages(
-                pdf, this._FilePath, fileSystem.OutputDirectory);
+            List<string> pdfImages = GetPDFImages(fileSystem, pdf, this._FilePath, fileSystem.OutputDirectory);
 
             hDocument ocrDocument = new HOCRFileCreator().
                 CreateHOCROfImage(fileSystem, pdfImages, tesseractLanguageString);
@@ -114,101 +115,18 @@ namespace TesseractUI.BusinessLogic
             r = null;
         }
 
-        private List<string> GetPDFImages(PdfReader pdf, string filePath, string outputPath)
+        private List<string> GetPDFImages(IFileSystem fileSystem, PdfReader pdf, string filePath, string outputPath)
         {
             List<string> pdfImages = new List<string>();
+            PDFImageGenerator imageGenerator = new PDFImageGenerator(fileSystem);
 
             for (int pageNumber = 1; pageNumber <= pdf.NumberOfPages; pageNumber++)
             {
-                pdfImages.Add(GetPageImage(pdf, filePath, pageNumber, outputPath));
+                pdfImages.Add(
+                    imageGenerator.GetPageImage(pdf, filePath, pageNumber, outputPath));
             }
 
             return pdfImages;
-        }
-
-        private string GenerateOutputPath()
-        {
-            //TODO Output-Path noch dynamisch generieren lassen
-            return @"D:\Test";
-        }
-
-        private string GetPageImage(
-            PdfReader pdf, string filePath, int pageNumber, string outputPath)
-        {
-            RandomAccessFileOrArray randomAccess = new RandomAccessFileOrArray(filePath);
-
-            string path = Path.Combine(outputPath, String.Format(@"{0}.jpg", pageNumber));
-
-            try
-            {
-                PdfDictionary pdfDictionary = pdf.GetPageN(pageNumber);
-                PdfDictionary res =
-                  (PdfDictionary)PdfReader.GetPdfObject(pdfDictionary.Get(PdfName.RESOURCES));
-                PdfDictionary xobj =
-                  (PdfDictionary)PdfReader.GetPdfObject(res.Get(PdfName.XOBJECT));
-
-                if (xobj != null)
-                {
-                    foreach (PdfName name in xobj.Keys)
-                    {
-                        PdfObject obj = xobj.Get(name);
-                        if (obj.IsIndirect())
-                        {
-                            PdfDictionary tg = (PdfDictionary)PdfReader.GetPdfObject(obj);
-                            PdfName type =
-                              (PdfName)PdfReader.GetPdfObject(tg.Get(PdfName.SUBTYPE));
-                            if (PdfName.IMAGE.Equals(type))
-                            {
-                                int XrefIndex = Convert.ToInt32(((PRIndirectReference)obj).Number.ToString(System.Globalization.CultureInfo.InvariantCulture));
-                                PdfObject pdfObj = pdf.GetPdfObject(XrefIndex);
-                                PdfStream pdfStrem = (PdfStream)pdfObj;
-                                byte[] bytes = PdfReader.GetStreamBytesRaw((PRStream)pdfStrem);
-                                if (bytes != null)
-                                {
-                                    using (MemoryStream memStream = new MemoryStream(bytes))
-                                    {
-                                        memStream.Position = 0;
-                                        Image img = Image.FromStream(memStream);
-                                        // must save the file while stream is open.
-                                        if (!Directory.Exists(outputPath))
-                                        {
-                                            Directory.CreateDirectory(outputPath);
-                                        }
-
-                                        EncoderParameters parms = new EncoderParameters(1);
-                                        parms.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Compression, 0);
-                                        ImageCodecInfo jpegEncoder = GetImageEncoder("JPEG");
-                                        img.Save(path, jpegEncoder, parms);
-                                        break;
-
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            catch
-            {
-                throw;
-            }
-
-            return path;
-        }
-
-        public static ImageCodecInfo GetImageEncoder(string imageType)
-        {
-            imageType = imageType.ToUpperInvariant();
-
-            foreach (ImageCodecInfo info in ImageCodecInfo.GetImageEncoders())
-            {
-                if (info.FormatDescription == imageType)
-                {
-                    return info;
-                }
-            }
-
-            return null;
         }
     }
 }
