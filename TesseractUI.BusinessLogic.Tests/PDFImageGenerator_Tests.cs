@@ -10,7 +10,7 @@ namespace TesseractUI.BusinessLogic.Tests
     {
         public void Test_GetPDFImages_FileNotExisting()
         {
-            IFileSystem fileSystem = new FileSystemAccess();
+            IFileSystem fileSystem = new FileSystemAccess("DEFAULT");
             PDFImageGenerator generator = new PDFImageGenerator(fileSystem);
 
             try

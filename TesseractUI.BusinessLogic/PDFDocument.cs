@@ -2,45 +2,41 @@
 using iTextSharp.text.pdf;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
 using TesseractUI.BusinessLogic.FileSystem;
 using TesseractUI.BusinessLogic.HOCR;
-using TesseractUI.BusinessLogic.ProcessAccess;
 
 namespace TesseractUI.BusinessLogic
 {
     public class PDFDocument
     {
         private string _FilePath;
-        private string _OutputPath;
 
         public PDFDocument(string filePath)
         {
             this._FilePath = filePath;
-            this._OutputPath = GenerateOutputPath();
         }
 
         public void Ocr(string tesseractLanguageString)
         {
-            IFileSystem fileSystem = new FileSystemAccess();
+            IFileSystem fileSystem = new FileSystemAccess(this._FilePath);
 
             PdfReader pdf = new PdfReader(this._FilePath);
 
-            List<string> pdfImages = GetPDFImages(pdf, this._FilePath, this._OutputPath);
+            List<string> pdfImages = GetPDFImages(
+                pdf, this._FilePath, fileSystem.OutputDirectory);
 
             hDocument ocrDocument = new HOCRFileCreator().
                 CreateHOCROfImage(fileSystem, pdfImages, tesseractLanguageString);
 
-            AddOcrContent(pdf, ocrDocument, 300);
+            AddOcrContent(fileSystem, pdf, ocrDocument, 300);
         }
 
-        public void AddOcrContent(PdfReader r, hDocument ocrDocument, int Dpi, string FontName = null)
+        public void AddOcrContent(IFileSystem fileSystem, PdfReader r, hDocument ocrDocument, int Dpi, string FontName = null)
         {
-            var mem = new FileStream(@"D:\Test\test.pdf", FileMode.Create, FileAccess.ReadWrite);
+            var mem = new FileStream(fileSystem.DestinationPDFPath, FileMode.Create, FileAccess.ReadWrite);
             PdfStamper pdfStamper = new PdfStamper(r, mem);
 
             int pageCounter = 1;
