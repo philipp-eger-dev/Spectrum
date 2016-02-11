@@ -30,7 +30,7 @@ namespace TesseractUI.BusinessLogic
             List<string> pdfImages = GetPDFImages(fileSystem, pdf, this._FilePath, fileSystem.OutputDirectory);
 
             hDocument ocrDocument = new HOCRFileCreator().
-                CreateHOCROfImage(fileSystem, pdfImages, tesseractLanguageString);
+                CreateHOCROfImage(new TesseractProgram(), pdfImages, tesseractLanguageString);
 
             AddOcrContent(fileSystem, pdf, ocrDocument, 300);
         }

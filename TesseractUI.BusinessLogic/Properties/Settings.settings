@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TesseractUI.BusinessLogic.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ProgramDirectoryName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Tesseract-OCR</Value>
+    </Setting>
+    <Setting Name="ExeName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">tesseract.exe</Value>
+    </Setting>
+    <Setting Name="HOCRFileExtension" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">.hocr</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
