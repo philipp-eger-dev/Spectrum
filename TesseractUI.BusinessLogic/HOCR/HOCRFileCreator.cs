@@ -1,8 +1,6 @@
 ﻿using Clock.Hocr;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
-using TesseractUI.BusinessLogic.FileSystem;
 using TesseractUI.BusinessLogic.ProcessAccess;
 
 namespace TesseractUI.BusinessLogic.HOCR

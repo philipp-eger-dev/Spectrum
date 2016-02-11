@@ -33,8 +33,8 @@ namespace TesseractUI.BusinessLogic.HOCR
 
             string[] paths = enviromentPath.Split(';');
             string exePath = paths.Select(x => Path.Combine(x, ExeName))
-                               .Where(x => File.Exists(x))
-                               .FirstOrDefault();
+                .Where(x => File.Exists(x))
+                .FirstOrDefault();
 
             if (string.IsNullOrWhiteSpace(exePath) == false)
             {

@@ -2,8 +2,6 @@
 using iTextSharp.text.pdf;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using TesseractUI.BusinessLogic.FileSystem;
 using TesseractUI.BusinessLogic.HOCR;
