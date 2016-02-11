@@ -6,6 +6,7 @@ using System.IO;
 using TesseractUI.BusinessLogic.FileSystem;
 using TesseractUI.BusinessLogic.HOCR;
 using TesseractUI.BusinessLogic.Images;
+using TesseractUI.BusinessLogic.ProcessAccess;
 
 namespace TesseractUI.BusinessLogic
 {
@@ -25,10 +26,10 @@ namespace TesseractUI.BusinessLogic
             PdfReader pdf = new PdfReader(this._FilePath);
             PDFImageGenerator imageGenerator = new PDFImageGenerator(fileSystem);
 
-            List<string> pdfImages = GetPDFImages(fileSystem, pdf, this._FilePath, fileSystem.OutputDirectory);
+            List<string> pdfImages = GeneratePDFImages(fileSystem, pdf, this._FilePath, fileSystem.OutputDirectory);
 
             hDocument ocrDocument = new HOCRFileCreator().
-                CreateHOCROfImage(new TesseractProgram(), pdfImages, tesseractLanguageString);
+                CreateHOCROfImage(new TesseractProgram(), new ProcessStarter(), pdfImages, tesseractLanguageString);
 
             AddOcrContent(fileSystem, pdf, ocrDocument, 300);
         }
@@ -113,7 +114,7 @@ namespace TesseractUI.BusinessLogic
             r = null;
         }
 
-        private List<string> GetPDFImages(IFileSystem fileSystem, PdfReader pdf, string filePath, string outputPath)
+        private List<string> GeneratePDFImages(IFileSystem fileSystem, PdfReader pdf, string filePath, string outputPath)
         {
             List<string> pdfImages = new List<string>();
             PDFImageGenerator imageGenerator = new PDFImageGenerator(fileSystem);

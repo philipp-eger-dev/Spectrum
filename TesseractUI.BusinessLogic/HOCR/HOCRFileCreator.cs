@@ -7,7 +7,8 @@ namespace TesseractUI.BusinessLogic.HOCR
 {
     public class HOCRFileCreator
     {
-        public hDocument CreateHOCROfImage(TesseractProgram tesseract, List<string> pdfImagePaths, string tesseractLanguage)
+        public hDocument CreateHOCROfImage(TesseractProgram tesseract, ProcessStarter starter, 
+            List<string> pdfImagePaths, string tesseractLanguage)
         {
             hDocument documentWithHocr = new hDocument();
 
@@ -19,7 +20,7 @@ namespace TesseractUI.BusinessLogic.HOCR
                 string commandArgs =
                     string.Concat(pdfImagePath, " ", oArg, " -l " + tesseractLanguage + " -psm 1 hocr ");
 
-                new ProcessStarter().StartProcess(tesseract.GetTesseractProgramPath(
+                starter.StartProcess(tesseract.GetTesseractProgramPath(
                         Properties.Settings.Default.ProgramDirectoryName, 
                         Properties.Settings.Default.ExeName), commandArgs);
 
