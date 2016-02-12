@@ -1,7 +1,6 @@
 ﻿using Clock.Hocr;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.IO;
 using TesseractUI.BusinessLogic.Exceptions;
 using TesseractUI.BusinessLogic.ProcessAccess;
@@ -13,10 +12,10 @@ namespace TesseractUI.BusinessLogic.HOCR
         public hDocument CreateHOCROfImage(ITesseractProgram tesseract, ProcessStarter starter, 
             List<string> pdfImagePaths, string tesseractLanguage)
         {
-            Contract.Requires<ArgumentNullException>(tesseract != null, "tesseract");
-            Contract.Requires<ArgumentNullException>(starter != null, "starter");
-            Contract.Requires<ArgumentNullException>(pdfImagePaths != null, "pdfImagePaths");
-            Contract.Requires<ArgumentNullException>(string.IsNullOrEmpty(tesseractLanguage), "tesseractLanguage");
+            if (tesseract == null || starter == null || pdfImagePaths == null || string.IsNullOrEmpty(tesseractLanguage))
+            {
+                throw new ArgumentNullException();
+            }
 
             if (!tesseract.TesseractInstalled)
             {
