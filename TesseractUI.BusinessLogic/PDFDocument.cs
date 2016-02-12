@@ -28,13 +28,15 @@ namespace TesseractUI.BusinessLogic
 
             List<string> pdfImages = GeneratePDFImages(fileSystem, pdf, this._FilePath, fileSystem.OutputDirectory);
 
-            hDocument ocrDocument = new HOCRFileCreator().
-                CreateHOCROfImages(fileSystem, new TesseractProgram(), new ProcessStarter(), pdfImages, tesseractLanguageString);
+            IHOCRDocument hocrDocument = new hDocument();
+
+            IHOCRDocument ocrDocument = new HOCRFileCreator().
+                CreateHOCROfImages(hocrDocument, fileSystem, new TesseractProgram(), new ProcessStarter(), pdfImages, tesseractLanguageString);
             
             AddOcrContent(fileSystem, pdf, ocrDocument, 300);
         }
 
-        public void AddOcrContent(IFileSystem fileSystem, PdfReader r, hDocument ocrDocument, int Dpi, string FontName = null)
+        public void AddOcrContent(IFileSystem fileSystem, PdfReader r, IHOCRDocument ocrDocument, int Dpi, string FontName = null)
         {
             var mem = new FileStream(fileSystem.DestinationPDFPath, FileMode.Create, FileAccess.ReadWrite);
             PdfStamper pdfStamper = new PdfStamper(r, mem);

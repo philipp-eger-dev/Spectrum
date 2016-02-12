@@ -64,6 +64,7 @@
     <Compile Include="HOCR\hPage.cs" />
     <Compile Include="HOCR\hParagraph.cs" />
     <Compile Include="HOCR\hWord.cs" />
+    <Compile Include="HOCR\IHOCRDocument.cs" />
     <Compile Include="HOCR\ITesseractProgram.cs" />
     <Compile Include="HOCR\TesseractProgram.cs" />
     <Compile Include="Images\PDFImage.cs" />

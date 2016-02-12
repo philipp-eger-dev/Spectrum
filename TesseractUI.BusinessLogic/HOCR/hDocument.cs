@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using TesseractUI.BusinessLogic.HOCR;
 
 namespace Clock.Hocr
 {
-    public class hDocument : HOcrClass
+    public class hDocument : HOcrClass, IHOCRDocument
     {
         public IList<hPage> Pages { get; set; }
 
