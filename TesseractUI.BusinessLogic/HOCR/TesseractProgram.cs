@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using TesseractUI.BusinessLogic.ProcessAccess;
 
 namespace TesseractUI.BusinessLogic.HOCR
 {
@@ -25,6 +26,21 @@ namespace TesseractUI.BusinessLogic.HOCR
                     return false;
                 }
             }
+        }
+
+        public string GenerateHOCROfImage(ProcessStarter starter, string pdfImagePath, string tesseractLanguage)
+        {
+            string outputFile = pdfImagePath.Replace(Path.GetExtension(pdfImagePath), "");
+
+            string oArg = '"' + outputFile + '"';
+            string commandArgs =
+                string.Concat(pdfImagePath, " ", oArg, " -l " + tesseractLanguage + " -psm 1 hocr ");
+
+            starter.StartProcess(this.GetTesseractProgramPath(
+                    Properties.Settings.Default.ProgramDirectoryName,
+                    Properties.Settings.Default.ExeName), commandArgs);
+
+            return outputFile;
         }
 
         public string GetTesseractProgramPath(string programDirectoryName, string exeName)

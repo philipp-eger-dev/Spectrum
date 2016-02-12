@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 using TesseractUI.BusinessLogic.Exceptions;
 using TesseractUI.BusinessLogic.HOCR;
 using TesseractUI.BusinessLogic.HOCR.Fakes;
@@ -20,7 +21,7 @@ namespace TesseractUI.BusinessLogic.Tests
 
             try
             {
-                fileCreator.CreateHOCROfImage(stubProgram, new ProcessStarter(), null, null);
+                fileCreator.CreateHOCROfImages(stubProgram, new ProcessStarter(), new List<string>(), "de");
             }
             catch(TesseractNotInstalledException ex)
             {
