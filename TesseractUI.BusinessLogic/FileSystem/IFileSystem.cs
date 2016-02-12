@@ -5,5 +5,7 @@
         string OutputDirectory { get; }
         string SourcePDFPath { get; }
         string DestinationPDFPath { get; }
+
+        bool Exists(string filePath);
     }
 }

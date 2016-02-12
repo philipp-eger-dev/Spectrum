@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace TesseractUI.BusinessLogic.FileSystem
 {
@@ -29,6 +30,13 @@ namespace TesseractUI.BusinessLogic.FileSystem
         public FileSystemAccess(string sourcePath)
         {
             this.SourcePDFPath = sourcePath;
+        }
+        #endregion
+
+        #region Methods
+        public bool Exists(string filePath)
+        {
+            return File.Exists(filePath);
         }
         #endregion
     }
