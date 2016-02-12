@@ -2,6 +2,7 @@
 using TesseractUI.BusinessLogic.Exceptions;
 using TesseractUI.BusinessLogic.HOCR;
 using TesseractUI.BusinessLogic.HOCR.Fakes;
+using TesseractUI.BusinessLogic.ProcessAccess;
 
 namespace TesseractUI.BusinessLogic.Tests
 {
@@ -19,7 +20,7 @@ namespace TesseractUI.BusinessLogic.Tests
 
             try
             {
-                fileCreator.CreateHOCROfImage(stubProgram, new ProcessAccess.ProcessStarter(), null, null);
+                fileCreator.CreateHOCROfImage(stubProgram, new ProcessStarter(), null, null);
             }
             catch(TesseractNotInstalledException ex)
             {
