@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace TesseractUI.BusinessLogic.HOCR
 {
-    public class TesseractProgram
+    public class TesseractProgram : ITesseractProgram
     {
         public bool TesseractInstalled
         {
@@ -27,12 +27,12 @@ namespace TesseractUI.BusinessLogic.HOCR
             }
         }
 
-        public string GetTesseractProgramPath(string ProgramDirectoryName, string ExeName)
+        public string GetTesseractProgramPath(string programDirectoryName, string exeName)
         {
             string enviromentPath = Environment.GetEnvironmentVariable("PATH");
 
             string[] paths = enviromentPath.Split(';');
-            string exePath = paths.Select(x => Path.Combine(x, ExeName))
+            string exePath = paths.Select(x => Path.Combine(x, exeName))
                 .Where(x => File.Exists(x))
                 .FirstOrDefault();
 
@@ -42,14 +42,14 @@ namespace TesseractUI.BusinessLogic.HOCR
             }
 
             string ProgramW6432 = Environment.GetEnvironmentVariable("ProgramW6432");
-            string pgFolder = Path.Combine(ProgramW6432 == null ? string.Empty : ProgramW6432, ProgramDirectoryName);
-            string pg86Folder = Path.Combine(Environment.GetEnvironmentVariable("ProgramFiles"), ProgramDirectoryName);
+            string pgFolder = Path.Combine(ProgramW6432 == null ? string.Empty : ProgramW6432, programDirectoryName);
+            string pg86Folder = Path.Combine(Environment.GetEnvironmentVariable("ProgramFiles"), programDirectoryName);
 
-            if (ProgramDirectoryName != null && ProgramDirectoryName != "")
+            if (programDirectoryName != null && programDirectoryName != "")
             {
                 if (Directory.Exists(pgFolder))
                 {
-                    string[] gsfiles = Directory.GetFiles(pgFolder, ExeName, SearchOption.AllDirectories);
+                    string[] gsfiles = Directory.GetFiles(pgFolder, exeName, SearchOption.AllDirectories);
 
                     foreach (string gs in gsfiles)
                         return gs;
@@ -57,14 +57,14 @@ namespace TesseractUI.BusinessLogic.HOCR
 
                 if (Directory.Exists(pg86Folder))
                 {
-                    string[] gsfiles = Directory.GetFiles(pg86Folder, ExeName, SearchOption.AllDirectories);
+                    string[] gsfiles = Directory.GetFiles(pg86Folder, exeName, SearchOption.AllDirectories);
 
                     foreach (string gs in gsfiles)
                         return gs;
                 }
             }
             //Finally check directory of executing assembly
-            string[] files = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, ExeName, SearchOption.AllDirectories);
+            string[] files = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, exeName, SearchOption.AllDirectories);
 
             foreach (string gs in files)
                 return gs;
