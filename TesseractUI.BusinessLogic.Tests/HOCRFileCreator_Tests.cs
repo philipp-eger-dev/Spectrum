@@ -1,9 +1,8 @@
-﻿using Clock.Hocr;
-using Clock.Hocr.Fakes;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.IO;
 using TesseractUI.BusinessLogic.Exceptions;
+using TesseractUI.BusinessLogic.Fakes;
 using TesseractUI.BusinessLogic.FileSystem;
 using TesseractUI.BusinessLogic.FileSystem.Fakes;
 using TesseractUI.BusinessLogic.HOCR;
@@ -26,7 +25,8 @@ namespace TesseractUI.BusinessLogic.Tests
 
             try
             {
-                fileCreator.CreateHOCROfImages(new hDocument(), new FileSystemAccess(""), stubProgram, new ProcessStarter(), new List<string>(), "de");
+                fileCreator.CreateHOCROfImages(new hDocument(), new Parser(),
+                    new FileSystemAccess(""), stubProgram, new ProcessStarter(), new List<string>(), "de");
             }
             catch(TesseractNotInstalledException ex)
             {
@@ -53,7 +53,8 @@ namespace TesseractUI.BusinessLogic.Tests
 
             try
             {
-                fileCreator.CreateHOCROfImages(new hDocument(), fileSystem, stubProgram, new ProcessStarter(), new List<string>() { "NotThere" }, "de");
+                fileCreator.CreateHOCROfImages(new hDocument(), new Parser(),
+                    fileSystem, stubProgram, new ProcessStarter(), new List<string>() { "NotThere" }, "de");
             }
             catch (FileNotFoundException ex)
             {
@@ -81,21 +82,24 @@ namespace TesseractUI.BusinessLogic.Tests
 
             IHOCRDocument document = new StubIHOCRDocument()
             {
-                AddFileString = (str) => { }
+                AddFileIParserString = (parse, hocrstr) => { }
+            };
+            IParser parser = new StubIParser()
+            {
+                ParseHOCRhDocumentStringBoolean = (hdoc, str, boo) => { return new hDocument(); }
             };
 
             try
             {
-                fileCreator.CreateHOCROfImages(
-                    new hDocument(), fileSystem, stubProgram, new ProcessStarter(), new List<string>() { "NotThere" }, "de");
+                fileCreator.CreateHOCROfImages(new hDocument(), parser,
+                    fileSystem, stubProgram, new ProcessStarter(), new List<string>() { "NotThere" }, "de");
             }
             catch (FileNotFoundException ex)
             {
-                Assert.IsTrue(true);
-                return;
+                Assert.Fail();
             }
 
-            Assert.Fail();
+            Assert.IsTrue(true);
         }
     }
 }

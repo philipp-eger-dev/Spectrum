@@ -1,10 +1,8 @@
-using System;
+using Clock.Hocr;
 using System.Collections.Generic;
-using System.Text;
-using System.IO;
 using TesseractUI.BusinessLogic.HOCR;
 
-namespace Clock.Hocr
+namespace TesseractUI.BusinessLogic
 {
     public class hDocument : HOcrClass, IHOCRDocument
     {
@@ -15,9 +13,9 @@ namespace Clock.Hocr
             Pages = new List<hPage>();
         }
 
-        public void AddFile(string hocr_file)
+        public void AddFile(IParser parser, string hocr_file)
         {
-            Parser.ParseHOCR(this, hocr_file, true);
+            parser.ParseHOCR(this, hocr_file, true);
         } 
     }
 }

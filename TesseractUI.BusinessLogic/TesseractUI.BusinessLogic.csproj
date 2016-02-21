@@ -69,6 +69,7 @@
     <Compile Include="HOCR\TesseractProgram.cs" />
     <Compile Include="Images\PDFImage.cs" />
     <Compile Include="Images\PDFImageGenerator.cs" />
+    <Compile Include="IParser.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="PDFDocument.cs" />
     <Compile Include="ProcessAccess\ProcessStarter.cs" />

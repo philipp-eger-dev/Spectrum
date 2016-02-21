@@ -7,6 +7,6 @@ namespace TesseractUI.BusinessLogic.HOCR
     {
         IList<hPage> Pages { get; set; }
 
-        void AddFile(string hocr_file);
+        void AddFile(IParser parser, string hocr_file);
     }
 }

@@ -31,7 +31,8 @@ namespace TesseractUI.BusinessLogic
             IHOCRDocument hocrDocument = new hDocument();
 
             IHOCRDocument ocrDocument = new HOCRFileCreator().
-                CreateHOCROfImages(hocrDocument, fileSystem, new TesseractProgram(), new ProcessStarter(), pdfImages, tesseractLanguageString);
+                CreateHOCROfImages(hocrDocument, new Parser(),
+                fileSystem, new TesseractProgram(), new ProcessStarter(), pdfImages, tesseractLanguageString);
             
             AddOcrContent(fileSystem, pdf, ocrDocument, 300);
         }

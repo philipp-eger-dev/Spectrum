@@ -1,16 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
 using Clock.Hocr;
 using HtmlAgilityPack;
-using System.Xml.XPath;
+using System;
 using System.IO;
-using System.Diagnostics;
+using System.Linq;
+using System.Text;
 
-namespace Clock.Hocr
+namespace TesseractUI.BusinessLogic
 {
-    internal class Parser
+    public class Parser : IParser
     {
         static HtmlDocument doc;
         static string hOcrFilePath;
@@ -19,7 +16,7 @@ namespace Clock.Hocr
         static hParagraph currentPara;
         static hLine currentLine;
 
-        public static hDocument ParseHOCR(hDocument hOrcDoc, string hOcrFile, bool Append)
+        public hDocument ParseHOCR(hDocument hOrcDoc, string hOcrFile, bool Append)
         {
   
             hDoc = hOrcDoc;
@@ -44,7 +41,7 @@ namespace Clock.Hocr
             return hDoc;
         }
 
-        private static void ParseNodes(HtmlNodeCollection nodes)
+        private void ParseNodes(HtmlNodeCollection nodes)
         {
             foreach (HtmlNode node in nodes)
             {
@@ -126,7 +123,7 @@ namespace Clock.Hocr
             
         }
 
-        private static void ParseTitle(string Title, HOcrClass ocrclass)
+        private void ParseTitle(string Title, HOcrClass ocrclass)
         {
             if (Title == null)
                 return;
@@ -168,7 +165,7 @@ namespace Clock.Hocr
             }
         }
 
-        private static void ParseCharactersForLine(string Title)
+        private void ParseCharactersForLine(string Title)
         {
             if (Title == null)
                 return;
@@ -240,8 +237,6 @@ namespace Clock.Hocr
                 w.CleanText();
                 currentLine.Words.Add(w);
             }
-
         }
-
     }
 }

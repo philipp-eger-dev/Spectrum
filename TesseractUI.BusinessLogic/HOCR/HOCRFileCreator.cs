@@ -11,7 +11,7 @@ namespace TesseractUI.BusinessLogic.HOCR
     public class HOCRFileCreator
     {
         public IHOCRDocument CreateHOCROfImages(IHOCRDocument document, 
-            IFileSystem fileSystem, ITesseractProgram tesseract, ProcessStarter starter, 
+            IParser parser, IFileSystem fileSystem, ITesseractProgram tesseract, ProcessStarter starter, 
             List<string> pdfImagePaths, string tesseractLanguage)
         {
             if (tesseract == null || starter == null || pdfImagePaths == null || string.IsNullOrEmpty(tesseractLanguage))
@@ -31,7 +31,7 @@ namespace TesseractUI.BusinessLogic.HOCR
 
                 string outputFile = tesseract.GenerateHOCROfImage(starter, pdfImagePath, tesseractLanguage);
 
-                document.AddFile(outputFile + Properties.Settings.Default.HOCRFileExtension);
+                document.AddFile(parser, outputFile + Properties.Settings.Default.HOCRFileExtension);
             }
 
             return document;
