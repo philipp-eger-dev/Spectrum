@@ -10,7 +10,7 @@ Uses Tesseract Engine and .Net-Framework. Licensed under GPLv2
 
 At first the Tesseract OCR-Engine must be installed. The Tesseract engine is  responsible for the optical character recognition within the project. The current version of Tesseract for Windows can be downloaded here:
 
-https://github.com/UB-Mannheim/tesseract/wiki
+http://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-setup-3.05.00dev.exe
 
 The installer is able to install additional languages out of the box.
 	
