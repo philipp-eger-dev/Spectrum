@@ -49,5 +49,17 @@ namespace TesseractUI.BusinessLogic.Properties {
                 return ((string)(this["HOCRFileExtension"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("%temp%\\spectrum")]
+        public string TemporaryPath {
+            get {
+                return ((string)(this["TemporaryPath"]));
+            }
+            set {
+                this["TemporaryPath"] = value;
+            }
+        }
     }
 }

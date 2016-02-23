@@ -1,13 +1,14 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 using TesseractUI.BusinessLogic.FileSystem;
 using TesseractUI.BusinessLogic.Images;
 
 namespace TesseractUI.BusinessLogic.Tests
 {
+    [TestClass]
     public class PDFImageGenerator_Tests
     {
+        [TestMethod]
         public void Test_GetPDFImages_FileNotExisting()
         {
             IFileSystem fileSystem = new FileSystemAccess("DEFAULT");
