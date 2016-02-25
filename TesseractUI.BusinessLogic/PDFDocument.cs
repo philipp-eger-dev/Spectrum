@@ -125,7 +125,7 @@ namespace TesseractUI.BusinessLogic
             for (int pageNumber = 1; pageNumber <= pdf.NumberOfPages; pageNumber++)
             {
                 pdfImages.Add(
-                    imageGenerator.GetPageImage(pdf, filePath, pageNumber, outputPath));
+                    imageGenerator.GeneratePageImage(pdf, filePath, pageNumber, outputPath));
             }
 
             return pdfImages;

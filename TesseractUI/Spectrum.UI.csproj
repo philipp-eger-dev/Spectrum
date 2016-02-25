@@ -192,9 +192,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TesseractUI.BusinessLogic\TesseractUI.BusinessLogic.csproj">
+    <ProjectReference Include="..\TesseractUI.BusinessLogic\Spectrum.BusinessLogic.csproj">
       <Project>{77cde625-8169-4d06-aac3-48537d3f8e03}</Project>
-      <Name>TesseractUI.BusinessLogic</Name>
+      <Name>Spectrum.BusinessLogic</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

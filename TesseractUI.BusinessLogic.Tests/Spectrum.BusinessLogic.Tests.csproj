@@ -36,6 +36,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="itextsharp, Version=5.5.8.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.8\lib\itextsharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itextsharp.5.5.8.0.Fakes">
+      <HintPath>FakesAssemblies\itextsharp.5.5.8.0.Fakes.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
@@ -65,13 +72,17 @@
     <Compile Include="HOCRFileCreator_Tests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TesseractUI.BusinessLogic\TesseractUI.BusinessLogic.csproj">
+    <ProjectReference Include="..\TesseractUI.BusinessLogic\Spectrum.BusinessLogic.csproj">
       <Project>{77cde625-8169-4d06-aac3-48537d3f8e03}</Project>
-      <Name>TesseractUI.BusinessLogic</Name>
+      <Name>Spectrum.BusinessLogic</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Fakes Include="Fakes\TesseractUI.BusinessLogic.fakes" />
+  </ItemGroup>
+  <ItemGroup>
+    <Fakes Include="Fakes\itextsharp.fakes" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

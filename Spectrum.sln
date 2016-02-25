@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesseractUI", "TesseractUI\TesseractUI.csproj", "{A500A247-75CE-4852-89D5-C549684FAF1E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectrum.UI", "TesseractUI\Spectrum.UI.csproj", "{A500A247-75CE-4852-89D5-C549684FAF1E}"
 EndProject
-Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "TesseractUI.Setup", "TesseractUI.Setup\TesseractUI.Setup.wixproj", "{8C16F77A-6FC8-43A0-B480-46EC4CAB8435}"
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Spectrum.Setup", "TesseractUI.Setup\Spectrum.Setup.wixproj", "{8C16F77A-6FC8-43A0-B480-46EC4CAB8435}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesseractUI.BusinessLogic", "TesseractUI.BusinessLogic\TesseractUI.BusinessLogic.csproj", "{77CDE625-8169-4D06-AAC3-48537D3F8E03}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectrum.BusinessLogic", "TesseractUI.BusinessLogic\Spectrum.BusinessLogic.csproj", "{77CDE625-8169-4D06-AAC3-48537D3F8E03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesseractUI.BusinessLogic.Tests", "TesseractUI.BusinessLogic.Tests\TesseractUI.BusinessLogic.Tests.csproj", "{1F5AFEA7-4E07-44EB-9294-3B3241DFC108}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectrum.BusinessLogic.Tests", "TesseractUI.BusinessLogic.Tests\Spectrum.BusinessLogic.Tests.csproj", "{1F5AFEA7-4E07-44EB-9294-3B3241DFC108}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

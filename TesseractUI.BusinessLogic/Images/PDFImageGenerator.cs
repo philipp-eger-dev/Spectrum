@@ -9,14 +9,19 @@ namespace TesseractUI.BusinessLogic.Images
 {
     public class PDFImageGenerator
     {
+        #region Fields
         private IFileSystem _FileSystemExporter;
+        #endregion
 
+        #region Constructor
         public PDFImageGenerator(IFileSystem fileSystemExporter)
         {
             this._FileSystemExporter = fileSystemExporter;
         }
+        #endregion
 
-        public string GetPageImage(
+        #region Methods
+        public string GeneratePageImage(
          PdfReader pdf, string filePath, int pageNumber, string outputPath)
         {
             RandomAccessFileOrArray randomAccess = new RandomAccessFileOrArray(filePath);
@@ -94,5 +99,6 @@ namespace TesseractUI.BusinessLogic.Images
 
             return null;
         }
+        #endregion
     }
 }
