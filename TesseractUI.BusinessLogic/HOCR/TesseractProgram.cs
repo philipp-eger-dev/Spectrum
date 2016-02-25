@@ -12,8 +12,8 @@ namespace TesseractUI.BusinessLogic.HOCR
         {
             get
             {
-                string programDirectoryName = ConfigurationManager.AppSettings["ProgramDirectoryName"];
-                string exeName = ConfigurationManager.AppSettings["ExeName"];
+                string programDirectoryName = Properties.Settings.Default.ProgramDirectoryName;
+                string exeName = Properties.Settings.Default.ExeName;
 
                 string result = new TesseractProgram().GetTesseractProgramPath(programDirectoryName, exeName);
 
