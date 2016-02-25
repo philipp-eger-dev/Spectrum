@@ -2,7 +2,7 @@
 Spectrum - Searchable PDF Creator
 
 Open-Source tool to generate searchable PDF files from large document libraries.
-Uses Tesseract Engine and .Net-Framework. Licensed under GPLv2
+Uses Tesseract Engine and .Net-Framework. Licensed under MIT License
 
 <h2>Installation manual</h2>
 
