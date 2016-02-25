@@ -22,5 +22,14 @@ namespace TesseractUI.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("D:\\Development\\Spectrum\\Spectrum\\TesseractUI\\LicenseAgreement.rtf")]
+        public string LicenseAgreementPath {
+            get {
+                return ((string)(this["LicenseAgreementPath"]));
+            }
+        }
     }
 }
