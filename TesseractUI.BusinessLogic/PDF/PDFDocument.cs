@@ -6,6 +6,7 @@ using System.IO;
 using TesseractUI.BusinessLogic.FileSystem;
 using TesseractUI.BusinessLogic.HOCR;
 using TesseractUI.BusinessLogic.Images;
+using TesseractUI.BusinessLogic.PDF;
 using TesseractUI.BusinessLogic.ProcessAccess;
 
 namespace TesseractUI.BusinessLogic
@@ -23,7 +24,7 @@ namespace TesseractUI.BusinessLogic
         {
             IFileSystem fileSystem = new FileSystemAccess(this._FilePath);
 
-            PdfReader pdf = new PdfReader(this._FilePath);
+            IPDFAccess pdf = new ITextSharpPDFAccess(fileSystem, this._FilePath);
             PDFImageGenerator imageGenerator = new PDFImageGenerator(fileSystem);
 
             List<string> pdfImages = GeneratePDFImages(fileSystem, pdf, this._FilePath, fileSystem.OutputDirectory);
@@ -37,15 +38,15 @@ namespace TesseractUI.BusinessLogic
             AddOcrContent(fileSystem, pdf, ocrDocument, 300);
         }
 
-        public void AddOcrContent(IFileSystem fileSystem, PdfReader r, IHOCRDocument ocrDocument, int Dpi, string FontName = null)
+        public void AddOcrContent(IFileSystem fileSystem, IPDFAccess pdf, IHOCRDocument ocrDocument, int Dpi, string FontName = null)
         {
             var mem = new FileStream(fileSystem.DestinationPDFPath, FileMode.Create, FileAccess.ReadWrite);
-            PdfStamper pdfStamper = new PdfStamper(r, mem);
+            PdfStamper pdfStamper = new PdfStamper(pdf.ReaderObject, mem);
 
             int pageCounter = 1;
             foreach (hPage hrPage in ocrDocument.Pages)
             {
-                PdfImportedPage page = pdfStamper.GetImportedPage(r, pageCounter);
+                PdfImportedPage page = pdfStamper.GetImportedPage(pdf.ReaderObject, pageCounter);
 
                 foreach (hParagraph para in hrPage.Paragraphs)
                 {
@@ -105,7 +106,7 @@ namespace TesseractUI.BusinessLogic
 
                 pageCounter++;
 
-                r.RemoveUnusedObjects();
+                pdf.RemoveUnusedObjects();
             }
 
 
@@ -114,10 +115,10 @@ namespace TesseractUI.BusinessLogic
             mem.Close();
 
             mem = null;
-            r = null;
+            pdf = null;
         }
 
-        private List<string> GeneratePDFImages(IFileSystem fileSystem, PdfReader pdf, string filePath, string outputPath)
+        private List<string> GeneratePDFImages(IFileSystem fileSystem, IPDFAccess pdf, string filePath, string outputPath)
         {
             List<string> pdfImages = new List<string>();
             PDFImageGenerator imageGenerator = new PDFImageGenerator(fileSystem);

@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using TesseractUI.BusinessLogic.FileSystem;
+using TesseractUI.BusinessLogic.PDF;
 
 namespace TesseractUI.BusinessLogic.Images
 {
@@ -22,7 +23,7 @@ namespace TesseractUI.BusinessLogic.Images
 
         #region Methods
         public string GeneratePageImage(
-         PdfReader pdf, string filePath, int pageNumber, string outputPath)
+         IPDFAccess pdf, string filePath, int pageNumber, string outputPath)
         {
             RandomAccessFileOrArray randomAccess = new RandomAccessFileOrArray(filePath);
 
