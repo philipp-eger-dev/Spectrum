@@ -120,7 +120,6 @@
     </Compile>
     <Compile Include="BusinessLogic\FileGridViewModel.cs" />
     <Compile Include="BusinessLogic\FileToProcess.cs" />
-    <Compile Include="BusinessLogic\Language.cs" />
     <Compile Include="BusinessLogic\ProcessingState.cs" />
     <Compile Include="BusinessLogic\RecognitionEventArgs.cs" />
     <Compile Include="BusinessLogic\RecognitionFactory.cs" />

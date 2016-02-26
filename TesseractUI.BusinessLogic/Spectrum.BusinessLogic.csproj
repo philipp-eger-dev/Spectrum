@@ -82,6 +82,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
+    <Compile Include="Tesseract\Language.cs" />
+    <Compile Include="Tesseract\LanguageMapping.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

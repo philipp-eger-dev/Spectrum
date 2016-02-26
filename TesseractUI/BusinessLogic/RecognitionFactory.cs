@@ -21,11 +21,10 @@ namespace TesseractUI
             Thread recognitionThread = new Thread(() =>
             {
                 file.Status = ProcessingState.Processing;
-                string tesseractLanguageString = GetTesseractStringFromLanguageEnumeration(file.ProcessingLanguage);
 
                 PDFDocument document = new PDFDocument(file.FilePath);
 
-                document.Ocr(tesseractLanguageString);
+                document.Ocr(file.ProcessingLanguage);
 
                 if (this.RecognitionFinished != null)
                 {
@@ -35,23 +34,6 @@ namespace TesseractUI
 
             recognitionThread.IsBackground = true;
             recognitionThread.Start();
-        }
-
-        private string GetTesseractStringFromLanguageEnumeration(Language language)
-        {
-            string tesseractLanguageString = null;
-
-            switch (language)
-            {
-                case Language.English:
-                    tesseractLanguageString = "eng";
-                    break;
-                case Language.German:
-                    tesseractLanguageString = "deu";
-                    break;
-            }
-
-            return tesseractLanguageString;
         }
 
         private string CreateFileOutputPath(string sourceFilePath, string outputDirectoryName, bool replaceSourceFile)

@@ -8,6 +8,7 @@ using TesseractUI.BusinessLogic.HOCR;
 using TesseractUI.BusinessLogic.Images;
 using TesseractUI.BusinessLogic.PDF;
 using TesseractUI.BusinessLogic.ProcessAccess;
+using TesseractUI.BusinessLogic.Tesseract;
 
 namespace TesseractUI.BusinessLogic
 {
@@ -20,7 +21,7 @@ namespace TesseractUI.BusinessLogic
             this._FilePath = filePath;
         }
 
-        public void Ocr(string tesseractLanguageString)
+        public void Ocr(Language recognitionLanguage)
         {
             IFileSystem fileSystem = new FileSystemAccess(this._FilePath);
 
@@ -30,6 +31,8 @@ namespace TesseractUI.BusinessLogic
             List<string> pdfImages = GeneratePDFImages(fileSystem, pdf, this._FilePath, fileSystem.OutputDirectory);
 
             IHOCRDocument hocrDocument = new hDocument();
+            string tesseractLanguageString = 
+                new LanguageMapping().GetTesseractLanguageStringFromEnumeration(recognitionLanguage);
 
             IHOCRDocument ocrDocument = new HOCRFileCreator().
                 CreateHOCROfImages(hocrDocument, new Parser(),

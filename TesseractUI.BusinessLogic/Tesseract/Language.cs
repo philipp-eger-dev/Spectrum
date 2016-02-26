@@ -1,4 +1,4 @@
-﻿namespace TesseractUI
+﻿namespace TesseractUI.BusinessLogic.Tesseract
 {
     public enum Language
     {

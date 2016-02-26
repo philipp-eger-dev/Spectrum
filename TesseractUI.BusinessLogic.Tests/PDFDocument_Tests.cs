@@ -6,8 +6,10 @@ namespace TesseractUI.BusinessLogic.Tests
     [TestClass]
     public class PDFDocument_Tests
     {
-        public void TestMethod1()
+        public void OCR_Test()
         {
+            PDFDocument sourceDocument = new PDFDocument("");
+            sourceDocument.Ocr(Tesseract.Language.English);
         }
     }
 }

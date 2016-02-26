@@ -1,4 +1,6 @@
-﻿namespace TesseractUI
+﻿using TesseractUI.BusinessLogic.Tesseract;
+
+namespace TesseractUI
 {
     public class FileToProcess
     {

@@ -134,7 +134,7 @@ namespace TesseractUI
                 this.FileGridVM.Files.Add(new FileToProcess()
                 {
                     FilePath = filePath,
-                    ProcessingLanguage = TesseractUI.Language.German,
+                    ProcessingLanguage = TesseractUI.BusinessLogic.Tesseract.Language.German,
                     Status = ProcessingState.Pending,
                     Process = true
                 });
