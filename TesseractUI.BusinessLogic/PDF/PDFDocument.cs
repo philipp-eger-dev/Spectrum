@@ -25,7 +25,7 @@ namespace TesseractUI.BusinessLogic
             IFileSystem fileSystem = new FileSystemAccess(this._FilePath);
 
             IPDFAccess pdf = new ITextSharpPDFAccess(fileSystem, this._FilePath);
-            PDFImageGenerator imageGenerator = new PDFImageGenerator(fileSystem);
+            PDFImageGenerator imageGenerator = new PDFImageGenerator();
 
             List<string> pdfImages = GeneratePDFImages(fileSystem, pdf, this._FilePath, fileSystem.OutputDirectory);
 
@@ -121,12 +121,12 @@ namespace TesseractUI.BusinessLogic
         private List<string> GeneratePDFImages(IFileSystem fileSystem, IPDFAccess pdf, string filePath, string outputPath)
         {
             List<string> pdfImages = new List<string>();
-            PDFImageGenerator imageGenerator = new PDFImageGenerator(fileSystem);
+            PDFImageGenerator imageGenerator = new PDFImageGenerator();
 
             for (int pageNumber = 1; pageNumber <= pdf.NumberOfPages; pageNumber++)
             {
                 pdfImages.Add(
-                    imageGenerator.GeneratePageImage(pdf, filePath, pageNumber, outputPath));
+                    imageGenerator.GeneratePageImage(fileSystem, pdf, filePath, pageNumber, outputPath));
             }
 
             return pdfImages;

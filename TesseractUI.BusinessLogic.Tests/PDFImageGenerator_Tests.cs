@@ -6,6 +6,8 @@ using System.IO;
 using TesseractUI.BusinessLogic.FileSystem;
 using TesseractUI.BusinessLogic.FileSystem.Fakes;
 using TesseractUI.BusinessLogic.Images;
+using TesseractUI.BusinessLogic.PDF;
+using TesseractUI.BusinessLogic.PDF.Fakes;
 
 namespace TesseractUI.BusinessLogic.Tests
 {
@@ -19,11 +21,15 @@ namespace TesseractUI.BusinessLogic.Tests
             {
                 ExistsString = (param) => { return false; }
             };
-            PDFImageGenerator generator = new PDFImageGenerator(fileSystem);
+            PDFImageGenerator generator = new PDFImageGenerator();
+            IPDFAccess pdf = new StubIPDFAccess()
+            {
+
+            };
 
             try
             {
-                //generator.GeneratePageImage(new PdfReader(""), "", 1, "");
+                generator.GeneratePageImage(fileSystem, pdf, "", 1, "");
 
                 Assert.IsTrue(false);
             }
