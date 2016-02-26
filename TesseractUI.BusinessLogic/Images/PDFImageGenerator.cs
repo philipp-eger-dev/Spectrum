@@ -10,10 +10,6 @@ namespace TesseractUI.BusinessLogic.Images
 {
     public class PDFImageGenerator
     {
-        #region Fields
-        private IFileSystem _FileSystem;
-        #endregion
-
         #region Methods
         public string GeneratePageImage(IFileSystem fileSystem,
          IPDFAccess pdf, string filePath, int pageNumber, string outputPath)
