@@ -45,20 +45,17 @@
         <Directory Id="CompanyFolder" Name="Spectrum">
           <Directory Id="INSTALLLOCATION" Name="TesseractUIProcessing">
             <Component Id="ProductComponent" Guid="{4A5619DF-5841-48EC-8D7C-D368718C6D1A}">
-              <File Id="MainApplicationFile" Name="$(var.TesseractUI.TargetFileName)" Source="$(var.TesseractUI.TargetPath)" KeyPath="yes">
+              <File Id="MainApplicationFile" Name="$(var.Spectrum.UI.TargetFileName)" Source="$(var.Spectrum.UI.TargetPath)" KeyPath="yes">
                 <Shortcut Advertise="yes" Id="DesktopShortCut" Name="Spectrum - Searchable PDF Creator" Directory="DesktopFolder" WorkingDirectory="INSTALLLOCATION" Description="TesseractUI ausführen" Icon="Icon.exe">
-                  <Icon Id="Icon.exe" SourceFile="$(var.TesseractUI.TargetPath)" />
+                  <Icon Id="Icon.exe" SourceFile="$(var.Spectrum.UI.TargetPath)" />
                 </Shortcut>
               </File>
             </Component>
-            <Component Id="OCRComponent" Guid="{777028E8-DA56-400E-9C71-844AE328E8BF}">
-              <File Id="HOCR2PDF" Name="hOcr2Pdf.dll" Source="$(var.TesseractUI.TargetDir)hOcr2Pdf.dll" KeyPath="yes" />
-            </Component>
             <Component Id="TextSharp" Guid="{777028E8-DA56-400E-9C51-844AE328E8BF}">
-              <File Id="ITextSharp" Name="itextsharp.dll" Source="$(var.TesseractUI.TargetDir)itextsharp.dll" KeyPath="yes" />
+              <File Id="ITextSharp" Name="itextsharp.dll" Source="$(var.Spectrum.UI.TargetDir)itextsharp.dll" KeyPath="yes" />
             </Component>
             <Component Id="AgilityPack" Guid="{777028E8-DA56-300E-9C71-844AE328E8BF}">
-              <File Id="HtmlAgilityPack" Name="HtmlAgilityPack.dll" Source="$(var.TesseractUI.TargetDir)HtmlAgilityPack.dll" KeyPath="yes" />
+              <File Id="HtmlAgilityPack" Name="HtmlAgilityPack.dll" Source="$(var.Spectrum.UI.TargetDir)HtmlAgilityPack.dll" KeyPath="yes" />
             </Component>
           </Directory>
         </Directory>
@@ -68,7 +65,6 @@
 
     <Feature Id="ProductFeature" Title="Spectrum - Searchable PDF Creator" Level="1">
       <ComponentRef Id="ProductComponent" />
-      <ComponentRef Id="OCRComponent" />
       <ComponentRef Id="TextSharp" />
       <ComponentRef Id="AgilityPack" />
     </Feature>
@@ -85,10 +81,10 @@
               After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
     </InstallUISequence>
 
-    <Icon Id="icon.ico" SourceFile="$(var.TesseractUI.TargetDir)TesseractUI.ico"/>
+    <Icon Id="icon.ico" SourceFile="$(var.Spectrum.UI.TargetDir)TesseractUI.ico"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
     
-    <WixVariable Id='WixUILicenseRtf' Overridable='yes' Value='$(var.TesseractUI.TargetDir)LicenseAgreement.rtf'/>
+    <WixVariable Id='WixUILicenseRtf' Overridable='yes' Value='$(var.Spectrum.UI.TargetDir)LicenseAgreement.rtf'/>
     
     <UIRef Id="WixUI_Minimal" />
     <UIRef Id="WixUI_ErrorProgressText" />

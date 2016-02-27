@@ -31,6 +31,14 @@
     </WixExtension>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TesseractUI.BusinessLogic\Spectrum.BusinessLogic.csproj">
+      <Name>Spectrum.BusinessLogic</Name>
+      <Project>{77cde625-8169-4d06-aac3-48537d3f8e03}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
     <ProjectReference Include="..\TesseractUI\Spectrum.UI.csproj">
       <Name>Spectrum.UI</Name>
       <Project>{a500a247-75ce-4852-89d5-c549684faf1e}</Project>
