@@ -19,7 +19,7 @@ namespace TesseractUI.BusinessLogic.Tests
         {
             IFileSystem fileSystem = new StubIFileSystem()
             {
-                ExistsString = (param) => { return false; }
+                FileExistsString = (param) => { return false; }
             };
             PDFImageGenerator generator = new PDFImageGenerator();
             IPDFAccess pdf = new StubIPDFAccess()

@@ -48,7 +48,7 @@ namespace TesseractUI.BusinessLogic.Tests
             
             IFileSystem fileSystem = new StubIFileSystem()
             {
-                ExistsString = (str) => { return false; }
+                FileExistsString = (str) => { return false; }
             };
 
             try
@@ -77,7 +77,7 @@ namespace TesseractUI.BusinessLogic.Tests
 
             IFileSystem fileSystem = new StubIFileSystem()
             {
-                ExistsString = (str) => { return true; }
+                FileExistsString = (str) => { return true; }
             };
 
             IHOCRDocument document = new StubIHOCRDocument()
