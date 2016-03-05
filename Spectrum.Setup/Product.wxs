@@ -18,7 +18,7 @@
     Id="1"
     Cabinet="media1.cab"
     EmbedCab="yes" />
-    
+
     <Property Id="ARPHELPLINK" Value="http://dotexpert.net" />
     <Property Id="ARPCONTACT" Value="Philipp Eger" />
     <Property Id="ARPURLINFOABOUT" Value="https://github.com/philipp-eger-dev/spectrum" />
@@ -83,7 +83,7 @@
               After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
       <RemoveExistingProducts After="InstallFinalize" />
     </InstallExecuteSequence>
-    
+
     <InstallUISequence>
       <Custom Action="PreventDowngrading"
               After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
@@ -91,9 +91,9 @@
 
     <Icon Id="icon.ico" SourceFile="$(var.Spectrum.UI.ProjectDir)Icons/TesseractUI.ico"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
-    
+
     <WixVariable Id='WixUILicenseRtf' Overridable='yes' Value='$(var.Spectrum.UI.ProjectDir)\LicenseAgreement.rtf'/>
-    
+
     <UIRef Id="WixUI_Minimal" />
     <UIRef Id="WixUI_ErrorProgressText" />
   </Product>
