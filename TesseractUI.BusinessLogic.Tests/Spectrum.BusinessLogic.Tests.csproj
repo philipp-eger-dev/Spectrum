@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TesseractUI.BusinessLogic.Tests</RootNamespace>
-    <AssemblyName>TesseractUI.BusinessLogic.Tests</AssemblyName>
+    <AssemblyName>Spectrum.BusinessLogic.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -46,10 +46,10 @@
     <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="TesseractUI.BusinessLogic.Fakes">
-      <HintPath>FakesAssemblies\TesseractUI.BusinessLogic.Fakes.dll</HintPath>
+    <Reference Include="Spectrum.BusinessLogic.Fakes">
+      <HintPath>FakesAssemblies\Spectrum.BusinessLogic.Fakes.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -72,17 +72,15 @@
     <Compile Include="HOCRFileCreator_Tests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Fakes Include="Fakes\itextsharp.fakes" />
+    <Fakes Include="Fakes\Spectrum.BusinessLogic.fakes" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\TesseractUI.BusinessLogic\Spectrum.BusinessLogic.csproj">
       <Project>{77cde625-8169-4d06-aac3-48537d3f8e03}</Project>
       <Name>Spectrum.BusinessLogic</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Fakes Include="Fakes\TesseractUI.BusinessLogic.fakes" />
-  </ItemGroup>
-  <ItemGroup>
-    <Fakes Include="Fakes\itextsharp.fakes" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

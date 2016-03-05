@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TesseractUI.Properties {
+namespace Spectrum.UI.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

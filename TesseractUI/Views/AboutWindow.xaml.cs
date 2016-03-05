@@ -10,7 +10,7 @@ namespace TesseractUI
         {
             InitializeComponent();
 
-            string licenseAgreementPath = Path.GetFullPath(Properties.Settings.Default.LicenseAgreementPath);
+            string licenseAgreementPath = Path.GetFullPath(Spectrum.UI.Properties.Settings.Default.LicenseAgreementPath);
 
             this.TxtLicense.Text = File.ReadAllText(licenseAgreementPath);
         }

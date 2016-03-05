@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TesseractUI.BusinessLogic</RootNamespace>
-    <AssemblyName>TesseractUI.BusinessLogic</AssemblyName>
+    <AssemblyName>Spectrum.BusinessLogic</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
