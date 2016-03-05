@@ -43,7 +43,7 @@
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
         <Directory Id="CompanyFolder" Name="Spectrum">
-          <Directory Id="INSTALLLOCATION" Name="TesseractUIProcessing">
+          <Directory Id="INSTALLLOCATION" Name="Spectrum.UI">
             <Component Id="ProductComponent" Guid="{4A5619DF-5841-48EC-8D7C-D368718C6D1A}">
               <File Id="MainApplicationFile" Name="$(var.Spectrum.UI.TargetFileName)" Source="$(var.Spectrum.UI.TargetPath)" KeyPath="yes">
                 <Shortcut Advertise="yes" Id="DesktopShortCut" Name="Spectrum - Searchable PDF Creator" Directory="DesktopFolder" WorkingDirectory="INSTALLLOCATION" Description="TesseractUI ausführen" Icon="Icon.exe">
@@ -54,8 +54,14 @@
             <Component Id="TextSharp" Guid="{777028E8-DA56-400E-9C51-844AE328E8BF}">
               <File Id="ITextSharp" Name="itextsharp.dll" Source="$(var.Spectrum.UI.TargetDir)itextsharp.dll" KeyPath="yes" />
             </Component>
-            <Component Id="AgilityPack" Guid="{777028E8-DA56-300E-9C71-844AE328E8BF}">
+            <Component Id="AgilityPack" Guid="{85B5FE79-93A1-4189-8074-12FE71F4E9FC}">
               <File Id="HtmlAgilityPack" Name="HtmlAgilityPack.dll" Source="$(var.Spectrum.UI.TargetDir)HtmlAgilityPack.dll" KeyPath="yes" />
+            </Component>
+            <Component Id="Tesseract" Guid="{168F12F0-3598-4331-92D4-C02A8277C297}">
+              <File Id="Tesseract" Name="Tesseract.dll" Source="$(var.Spectrum.UI.TargetDir)Tesseract.dll" KeyPath="yes" />
+            </Component>
+            <Component Id="Spectrum.BusinessLogic" Guid="{A9EEBA6E-1110-471E-B124-A2B3EE024BEF}">
+              <File Id="Spectrum.BusinessLogic" Name="Spectrum.BusinessLogic.dll" Source="$(var.Spectrum.UI.TargetDir)Spectrum.BusinessLogic.dll" KeyPath="yes" />
             </Component>
           </Directory>
         </Directory>
@@ -67,6 +73,8 @@
       <ComponentRef Id="ProductComponent" />
       <ComponentRef Id="TextSharp" />
       <ComponentRef Id="AgilityPack" />
+      <ComponentRef Id="Tesseract" />
+      <ComponentRef Id="Spectrum.BusinessLogic" />
     </Feature>
     <CustomAction Id="PreventDowngrading"
                   Error="A previous version is already installed." />
