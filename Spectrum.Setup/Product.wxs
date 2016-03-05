@@ -6,19 +6,19 @@
   Id="*"
   Name="Spectrum - Searchable PDF Creator"
   Language="1033"
-  Version="0.8.0.0"
+  Version="0.9.0.0"
   Manufacturer="$(var.Manufactor)"
   UpgradeCode="$(var.UpgradeGuid)">
     <Package
     InstallerVersion="200"
     Compressed="yes"
-    Description="Spectrum - Searchable PDF Creator - Alpha Version"
+    Description="Spectrum - Searchable PDF Creator"
     Manufacturer="$(var.Manufactor)" />
     <Media
     Id="1"
     Cabinet="media1.cab"
     EmbedCab="yes" />
-    
+
     <Property Id="ARPHELPLINK" Value="http://dotexpert.net" />
     <Property Id="ARPCONTACT" Value="Philipp Eger" />
     <Property Id="ARPURLINFOABOUT" Value="https://github.com/philipp-eger-dev/spectrum" />
@@ -66,8 +66,19 @@
           </Directory>
         </Directory>
       </Directory>
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="SpectrumShortcutsDir" Name="Spectrum" />
+      </Directory>
       <Directory Id="DesktopFolder" Name="Desktop" />
     </Directory>
+    
+    <DirectoryRef Id="SpectrumShortcutsDir">
+      <Component Id="SpectrumStartMenuShortcuts"
+        Guid="{1C58570C-FB0A-4AB9-8E69-609DBFA65C3C}">
+       <RemoveFolder Id="RemoveMyShortcutsDir" On="uninstall" />
+      <RegistryValue Root="HKCU" Key="Software\Microsoft\AwesomeSoftware" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+   </DirectoryRef>
 
     <Feature Id="ProductFeature" Title="Spectrum - Searchable PDF Creator" Level="1">
       <ComponentRef Id="ProductComponent" />
@@ -75,6 +86,7 @@
       <ComponentRef Id="AgilityPack" />
       <ComponentRef Id="Tesseract" />
       <ComponentRef Id="Spectrum.BusinessLogic" />
+      <ComponentRef Id="SpectrumStartMenuShortcuts" />
     </Feature>
     <CustomAction Id="PreventDowngrading"
                   Error="A previous version is already installed." />
@@ -83,7 +95,7 @@
               After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
       <RemoveExistingProducts After="InstallFinalize" />
     </InstallExecuteSequence>
-    
+
     <InstallUISequence>
       <Custom Action="PreventDowngrading"
               After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
@@ -91,9 +103,9 @@
 
     <Icon Id="icon.ico" SourceFile="$(var.Spectrum.UI.ProjectDir)Icons/TesseractUI.ico"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
-    
+
     <WixVariable Id='WixUILicenseRtf' Overridable='yes' Value='$(var.Spectrum.UI.ProjectDir)\LicenseAgreement.rtf'/>
-    
+
     <UIRef Id="WixUI_Minimal" />
     <UIRef Id="WixUI_ErrorProgressText" />
   </Product>
