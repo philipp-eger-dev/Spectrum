@@ -4,7 +4,7 @@
 		<BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense" />
 		<Chain>
       <ExePackage SourceFile="$(var.ProjectDir)Dependencies\tesseract-ocr-setup-3.05.00dev.exe"></ExePackage>
-      <MsiPackage SourceFile="$(var.SolutionDir)Spectrum.Setup\bin\Release\TesseractUI.Setup.msi"></MsiPackage>
+      <MsiPackage SourceFile="$(var.SolutionDir)Spectrum.Setup\bin\Release\Spectrum.Setup.msi"></MsiPackage>
     </Chain>
 	</Bundle>
 </Wix>
