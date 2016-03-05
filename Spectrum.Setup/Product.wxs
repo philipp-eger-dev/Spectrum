@@ -66,8 +66,19 @@
           </Directory>
         </Directory>
       </Directory>
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="SpectrumShortcutsDir" Name="Spectrum" />
+      </Directory>
       <Directory Id="DesktopFolder" Name="Desktop" />
     </Directory>
+    
+    <DirectoryRef Id="SpectrumShortcutsDir">
+      <Component Id="SpectrumStartMenuShortcuts"
+        Guid="{1C58570C-FB0A-4AB9-8E69-609DBFA65C3C}">
+       <RemoveFolder Id="RemoveMyShortcutsDir" On="uninstall" />
+      <RegistryValue Root="HKCU" Key="Software\Microsoft\AwesomeSoftware" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+   </DirectoryRef>
 
     <Feature Id="ProductFeature" Title="Spectrum - Searchable PDF Creator" Level="1">
       <ComponentRef Id="ProductComponent" />
@@ -75,6 +86,7 @@
       <ComponentRef Id="AgilityPack" />
       <ComponentRef Id="Tesseract" />
       <ComponentRef Id="Spectrum.BusinessLogic" />
+      <ComponentRef Id="SpectrumStartMenuShortcuts" />
     </Feature>
     <CustomAction Id="PreventDowngrading"
                   Error="A previous version is already installed." />
