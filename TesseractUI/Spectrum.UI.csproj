@@ -75,7 +75,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>TesseractUI.ico</ApplicationIcon>
+    <ApplicationIcon>Spectrum.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
@@ -179,7 +179,7 @@
     <Resource Include="Icons\TesseractUI.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="TesseractUI.ico" />
+    <Resource Include="Spectrum.ico" />
     <Resource Include="Icons\About_Icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
