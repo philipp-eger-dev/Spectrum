@@ -81,10 +81,10 @@
               After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
     </InstallUISequence>
 
-    <Icon Id="icon.ico" SourceFile="$(var.Spectrum.UI.TargetDir)TesseractUI.ico"/>
+    <Icon Id="icon.ico" SourceFile="$(var.Spectrum.UI.ProjectDir)Icons/TesseractUI.ico"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
     
-    <WixVariable Id='WixUILicenseRtf' Overridable='yes' Value='$(var.Spectrum.UI.TargetDir)LicenseAgreement.rtf'/>
+    <WixVariable Id='WixUILicenseRtf' Overridable='yes' Value='$(var.Spectrum.UI.ProjectDir)\LicenseAgreement.rtf'/>
     
     <UIRef Id="WixUI_Minimal" />
     <UIRef Id="WixUI_ErrorProgressText" />
