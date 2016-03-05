@@ -77,7 +77,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TesseractUI.BusinessLogic\Spectrum.BusinessLogic.csproj">
+    <ProjectReference Include="..\Spectrum.BusinessLogic\Spectrum.BusinessLogic.csproj">
       <Project>{77cde625-8169-4d06-aac3-48537d3f8e03}</Project>
       <Name>Spectrum.BusinessLogic</Name>
     </ProjectReference>
