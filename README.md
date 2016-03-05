@@ -1,5 +1,5 @@
 # Spectrum
-Spectrum - Searchable PDF Creator
+Spectrum - Searchable PDF Creator - <a href="https://github.com/philipp-eger-dev/Spectrum/releases/download/0.9.0.0/Spectrum_0.9.0.0_ALPHA.exe">Download Setup</a>
 
 Open-Source tool to generate searchable PDF files from large document libraries.
 Uses Tesseract Engine and .Net-Framework. Licensed under <a href="https://opensource.org/licenses/MIT">MIT License</a>.
