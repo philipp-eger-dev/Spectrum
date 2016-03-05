@@ -12,8 +12,6 @@ Thanks to UB Mannheim providing a great Windows Setup for Tesseract on their Git
 	
 <strong>Installation of Spectrum</strong>	
 
-Spectrum can be installed easily with a simple installer. It can be downloaded here:
-
-https://github.com/philipp-eger-dev/Spectrum/releases/download/0.9.0.0/Spectrum_0.9.0.0_ALPHA.exe
+Spectrum can be installed easily with a simple installer. It can be downloaded <a href="https://github.com/philipp-eger-dev/Spectrum/releases/download/0.9.0.0/Spectrum_0.9.0.0_ALPHA.exe">here</a>
 
 <strong>This is an Alpha version which can contain bugs. You are welcome to add bugs to issues list if you find some.</strong>
