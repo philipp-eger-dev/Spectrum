@@ -6,14 +6,12 @@ Uses Tesseract Engine and .Net-Framework. Licensed under <a href="https://openso
 
 <h2>Installation manual</h2>
 
-<strong>Tesseract OCR Engine installation</strong>
+An integrated installer for tesseract is included now in the Setup. This should avoid many problems caused by the complex integration of tesseract engine. The installer is able to download additional languages.
 
-At first the Tesseract OCR-Engine must be installed. The Tesseract engine is  responsible for the optical character recognition within the project. The current version of Tesseract for Windows can be downloaded here:
-
-http://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-setup-3.05.00dev.exe
-
-The installer is able to install additional languages out of the box.
+Thanks to UB Mannheim providing a great Windows Setup for Tesseract on their Github-Page: https://github.com/UB-Mannheim/tesseract?files=1
 	
 <strong>Installation of Spectrum</strong>	
 
-Spectrum can be installed easily with a simple .msi-installer. It can be downloaded here:
+Spectrum can be installed easily with a simple installer. It can be downloaded here:
+
+https://github.com/philipp-eger-dev/Spectrum/releases/download/0.9.0.0/Spectrum_0.9.0.0_ALPHA.exe
