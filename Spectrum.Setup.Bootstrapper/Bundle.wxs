@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Bundle Name="Spectrum.Setup.Bootstrapper" Version="1.0.0.0" Manufacturer="Philipp Eger" UpgradeCode="9e9e7364-f0a9-4a72-b832-16b133caea7e">
+		<BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense" />
+		<Chain>
+      <ExePackage SourceFile="D:\Development\Spectrum\Spectrum\Spectrum.Setup.Bootstrapper\Dependencies\tesseract-ocr-setup-3.05.00dev.exe">
+      </ExePackage>
+      <MsiPackage SourceFile="D:\Development\Spectrum\Spectrum\Spectrum.Setup\bin\Debug\TesseractUI.Setup.msi">
+      </MsiPackage>
+    </Chain>
+	</Bundle>
+</Wix>
