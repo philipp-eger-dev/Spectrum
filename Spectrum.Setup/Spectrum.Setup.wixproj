@@ -6,7 +6,7 @@
     <ProductVersion>3.9</ProductVersion>
     <ProjectGuid>8c16f77a-6fc8-43a0-b480-46ec4cab8435</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>TesseractUI.Setup</OutputName>
+    <OutputName>Spectrum.Setup</OutputName>
     <OutputType>Package</OutputType>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
@@ -31,7 +31,7 @@
     </WixExtension>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TesseractUI.BusinessLogic\Spectrum.BusinessLogic.csproj">
+    <ProjectReference Include="..\Spectrum.BusinessLogic\Spectrum.BusinessLogic.csproj">
       <Name>Spectrum.BusinessLogic</Name>
       <Project>{77cde625-8169-4d06-aac3-48537d3f8e03}</Project>
       <Private>True</Private>
@@ -39,7 +39,7 @@
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
       <RefTargetDir>INSTALLFOLDER</RefTargetDir>
     </ProjectReference>
-    <ProjectReference Include="..\TesseractUI\Spectrum.UI.csproj">
+    <ProjectReference Include="..\Spectrum.UI\Spectrum.UI.csproj">
       <Name>Spectrum.UI</Name>
       <Project>{a500a247-75ce-4852-89d5-c549684faf1e}</Project>
       <Private>True</Private>
