@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Bundle Name="Spectrum.Setup.Bootstrapper" Version="1.0.0.0" Manufacturer="Philipp Eger" UpgradeCode="9e9e7364-f0a9-4a72-b832-16b133caea7e">
-		<BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense" />
-		<Chain>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:bal="http://schemas.microsoft.com/wix/BalExtension">
+  <Bundle Name="Spectrum - Searchable PDF Generator" Version="0.9.0.0" Manufacturer="Philipp Eger" UpgradeCode="9e9e7364-f0a9-4a72-b832-16b133caea7e">
+    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense">
+      <bal:WixStandardBootstrapperApplication
+                  LicenseFile="$(var.SolutionDir)Spectrum.UI\LicenseAgreement.rtf"
+                  LogoFile="$(var.SolutionDir)Spectrum.UI\Icons\TesseractUI.png" />
+    </BootstrapperApplicationRef>
+    <Chain>
       <ExePackage SourceFile="$(var.ProjectDir)Dependencies\tesseract-ocr-setup-3.05.00dev.exe"></ExePackage>
       <MsiPackage SourceFile="$(var.SolutionDir)Spectrum.Setup\bin\Release\Spectrum.Setup.msi"></MsiPackage>
     </Chain>
-	</Bundle>
+  </Bundle>
 </Wix>
