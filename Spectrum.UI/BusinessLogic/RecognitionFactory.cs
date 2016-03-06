@@ -42,7 +42,15 @@ namespace TesseractUI
 
         private string GetTargetPath(string filePath, string outputDirectory)
         {
-            return outputDirectory + "\\" + Path.GetFileName(filePath);
+            string targetFileName = Path.GetFileName(filePath);
+
+            if (Path.GetDirectoryName(filePath) == outputDirectory)
+            {
+                 targetFileName = 
+                    Path.GetFileNameWithoutExtension(filePath) + "_OCR" + Path.GetExtension(filePath);
+            }
+
+            return outputDirectory + "\\" + targetFileName;
         }
 
         private string CreateFileOutputPath(string sourceFilePath, string outputDirectoryName, bool replaceSourceFile)
