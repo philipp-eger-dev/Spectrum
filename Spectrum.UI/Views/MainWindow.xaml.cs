@@ -8,6 +8,8 @@ using System.Windows.Threading;
 using System.Diagnostics;
 using System.Windows.Input;
 using System.ComponentModel;
+using TesseractUI.BusinessLogic.Tesseract;
+using TesseractUI.BusinessLogic.HOCR;
 
 namespace TesseractUI
 {
@@ -25,6 +27,9 @@ namespace TesseractUI
         public MainWindow()
         {
             InitializeComponent();
+
+            TesseractLanguages languages = new TesseractLanguages();
+            languages.GetSupportedLanguagesFromTesseract(new TesseractProgram());
 
             this.FileGridVM = new FileGridViewModel();
             this.DataContext = this.FileGridVM;
