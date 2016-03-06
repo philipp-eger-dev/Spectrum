@@ -28,8 +28,6 @@ namespace TesseractUI
 
             this.FileGridVM = new FileGridViewModel();
             this.DataContext = this.FileGridVM;
-
-            this.Closing += MainWindow_Closing;
         }
         #endregion
 
@@ -109,18 +107,6 @@ namespace TesseractUI
             };
 
             aboutWindow.ShowDialog();
-        }
-
-        private void MainWindow_Closing(object sender, CancelEventArgs e)
-        {
-            try
-            {
-                //TempData.Instance.CleanAll();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
         }
         #endregion
 

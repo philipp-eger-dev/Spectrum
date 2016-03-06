@@ -14,7 +14,10 @@ namespace TesseractUI.BusinessLogic
 {
     public class PDFDocument
     {
+        #region Fields
         private string _FilePath;
+        private IFileSystem _FileSystem;
+        #endregion
 
         public PDFDocument(string filePath)
         {
@@ -23,12 +26,13 @@ namespace TesseractUI.BusinessLogic
 
         public void Ocr(Language recognitionLanguage)
         {
-            IFileSystem fileSystem = new FileSystemAccess(this._FilePath);
+            this._FileSystem = new FileSystemAccess(this._FilePath);
 
-            IPDFAccess pdf = new ITextSharpPDFAccess(fileSystem, this._FilePath);
+            IPDFAccess pdf = new ITextSharpPDFAccess(this._FileSystem, this._FilePath);
             PDFImageGenerator imageGenerator = new PDFImageGenerator();
 
-            List<string> pdfImages = GeneratePDFImages(fileSystem, pdf, this._FilePath, fileSystem.OutputDirectory);
+            List<string> pdfImages = GeneratePDFImages(
+                this._FileSystem, pdf, this._FilePath, this._FileSystem.TemporaryWorkingDirectory);
 
             IHOCRDocument hocrDocument = new hDocument();
             string tesseractLanguageString = 
@@ -36,9 +40,26 @@ namespace TesseractUI.BusinessLogic
 
             IHOCRDocument ocrDocument = new HOCRFileCreator().
                 CreateHOCROfImages(hocrDocument, new Parser(),
-                fileSystem, new TesseractProgram(), new ProcessStarter(), pdfImages, tesseractLanguageString);
+                this._FileSystem, new TesseractProgram(), new ProcessStarter(), pdfImages, tesseractLanguageString);
             
-            AddOcrContent(fileSystem, pdf, ocrDocument, 300);
+            AddOcrContent(this._FileSystem, pdf, ocrDocument, 300);
+        }
+
+        public void DeleteTemporaryFiles()
+        {
+            this._FileSystem.DeleteTemporaryWorkingDirectory();
+        }
+
+        public void SaveToPath(string targetPath)
+        {
+            try
+            {
+                File.Copy(this._FileSystem.DestinationPDFPath, targetPath, true);
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
         public void AddOcrContent(IFileSystem fileSystem, IPDFAccess pdf, IHOCRDocument ocrDocument, int Dpi, string FontName = null)

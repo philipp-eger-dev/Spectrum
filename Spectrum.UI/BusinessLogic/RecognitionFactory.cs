@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading;
 using TesseractUI.BusinessLogic;
+using TesseractUI.BusinessLogic.Tesseract;
 
 namespace TesseractUI
 {
@@ -23,8 +24,11 @@ namespace TesseractUI
                 file.Status = ProcessingState.Processing;
 
                 PDFDocument document = new PDFDocument(file.FilePath);
-
-                document.Ocr(file.ProcessingLanguage);
+                
+                //TODO Support multiple languages
+                document.Ocr(Language.German);
+                document.SaveToPath(this.GetTargetPath(file.FilePath));
+                document.DeleteTemporaryFiles();
 
                 if (this.RecognitionFinished != null)
                 {
@@ -34,6 +38,12 @@ namespace TesseractUI
 
             recognitionThread.IsBackground = true;
             recognitionThread.Start();
+        }
+
+        private string GetTargetPath(string filePath)
+        {
+            return filePath.Replace(
+                    Path.GetExtension(filePath), "") + "_OCR.pdf";
         }
 
         private string CreateFileOutputPath(string sourceFilePath, string outputDirectoryName, bool replaceSourceFile)
