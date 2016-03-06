@@ -32,8 +32,6 @@ namespace TesseractUI
         {
             InitializeComponent();
 
-            DataContext = this;
-
             try
             {
                 TesseractLanguages languages = new TesseractLanguages();
