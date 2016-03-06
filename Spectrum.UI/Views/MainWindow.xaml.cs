@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
-using System.IO;
-using System.Windows.Threading;
-using System.Diagnostics;
 using System.Windows.Input;
-using System.ComponentModel;
-using TesseractUI.BusinessLogic.Tesseract;
+using System.Windows.Threading;
 using TesseractUI.BusinessLogic.HOCR;
+using TesseractUI.BusinessLogic.Tesseract;
 
 namespace TesseractUI
 {
