@@ -138,6 +138,7 @@ namespace TesseractUI
                 {
                     FilePath = filePath,
                     Status = ProcessingState.Pending,
+                    ProcessingLanguage = BusinessLogic.Tesseract.Language.English,
                     SupportedLanguages = this.SupportedLanguages,
                     Process = true
                 });
