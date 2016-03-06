@@ -3,6 +3,14 @@
     public enum Language
     {
         English,
-        German
+        German,
+        Francais,
+        Italian,
+        Portugese,
+        Russian,
+        Spanish,
+        Swedish,
+        Indian,
+        Norwegian
     }
 }

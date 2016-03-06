@@ -56,23 +56,6 @@ namespace TesseractUI
 
             return outputDirectory + "\\" + targetFileName;
         }
-
-        private string CreateFileOutputPath(string sourceFilePath, string outputDirectoryName, bool replaceSourceFile)
-        {
-            string fileOutputPath = null;
-
-            if (replaceSourceFile)
-            {
-                fileOutputPath = outputDirectoryName + @"\" + Path.GetFileName(sourceFilePath);   
-            }
-            else
-            {
-                fileOutputPath = outputDirectoryName + @"\" + Path.GetFileNameWithoutExtension(sourceFilePath) +
-                                 FILENAMEEXTENSION_OCR + Path.GetExtension(sourceFilePath);
-            }
-
-            return fileOutputPath;
-        }
         #endregion
     }
 }
