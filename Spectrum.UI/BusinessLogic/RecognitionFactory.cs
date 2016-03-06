@@ -27,7 +27,7 @@ namespace TesseractUI
                 
                 //TODO Support multiple languages
                 document.Ocr(Language.German);
-                document.SaveToPath(this.GetTargetPath(file.FilePath, outputDirectory));
+                document.SaveToPath(this.GetTargetPath(file.FilePath, outputDirectory, replaceSourceFile));
                 document.DeleteTemporaryFiles();
 
                 if (this.RecognitionFinished != null)
@@ -40,14 +40,18 @@ namespace TesseractUI
             recognitionThread.Start();
         }
 
-        private string GetTargetPath(string filePath, string outputDirectory)
+        private string GetTargetPath(string filePath, string outputDirectory, bool replaceSourceFiles)
         {
             string targetFileName = Path.GetFileName(filePath);
 
-            if (Path.GetDirectoryName(filePath) == outputDirectory)
+            if (Path.GetDirectoryName(filePath) == outputDirectory && !replaceSourceFiles)
             {
                  targetFileName = 
                     Path.GetFileNameWithoutExtension(filePath) + "_OCR" + Path.GetExtension(filePath);
+            }
+            else if (replaceSourceFiles)
+            {
+                targetFileName = Path.GetFileName(filePath);
             }
 
             return outputDirectory + "\\" + targetFileName;
