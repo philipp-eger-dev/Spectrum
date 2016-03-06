@@ -51,7 +51,7 @@
                     <DataGridTemplateColumn Header="Language">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <ComboBox ItemsSource="{Binding SupportedLanguages, Converter={StaticResource LanguageEnumToStringConverter}}"  />
+                                <ComboBox ItemsSource="{Binding SupportedLanguages, Converter={StaticResource LanguageEnumToStringConverter}}" SelectedItem="{Binding ProcessingLanguage, Mode=TwoWay}"  />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

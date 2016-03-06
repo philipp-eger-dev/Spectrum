@@ -25,8 +25,7 @@ namespace TesseractUI
                  
                 PDFDocument document = new PDFDocument(file.FilePath);
                 
-                //TODO Support multiple languages
-                document.Ocr(Language.German);
+                document.Ocr(file.ProcessingLanguage);
                 document.SaveToPath(this.GetTargetPath(file.FilePath, outputDirectory, replaceSourceFile));
                 document.DeleteTemporaryFiles();
 

@@ -12,5 +12,12 @@ namespace TesseractUI
         public bool Process { get; set; }
         public ObservableCollection<Language> SupportedLanguages { get; set; }
         #endregion
+
+        #region Constructor
+        public FileToProcess()
+        {
+            this.ProcessingLanguage = Language.English;
+        }
+        #endregion
     }
 }
