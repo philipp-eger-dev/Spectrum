@@ -22,12 +22,12 @@ namespace TesseractUI
             Thread recognitionThread = new Thread(() =>
             {
                 file.Status = ProcessingState.Processing;
-
+                 
                 PDFDocument document = new PDFDocument(file.FilePath);
                 
                 //TODO Support multiple languages
                 document.Ocr(Language.German);
-                document.SaveToPath(this.GetTargetPath(file.FilePath));
+                document.SaveToPath(this.GetTargetPath(file.FilePath, outputDirectory));
                 document.DeleteTemporaryFiles();
 
                 if (this.RecognitionFinished != null)
@@ -40,10 +40,9 @@ namespace TesseractUI
             recognitionThread.Start();
         }
 
-        private string GetTargetPath(string filePath)
+        private string GetTargetPath(string filePath, string outputDirectory)
         {
-            return filePath.Replace(
-                    Path.GetExtension(filePath), "") + "_OCR.pdf";
+            return outputDirectory + "\\" + Path.GetFileName(filePath);
         }
 
         private string CreateFileOutputPath(string sourceFilePath, string outputDirectoryName, bool replaceSourceFile)
