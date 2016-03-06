@@ -1,4 +1,5 @@
-﻿using TesseractUI.BusinessLogic.Tesseract;
+﻿using System.Collections.ObjectModel;
+using TesseractUI.BusinessLogic.Tesseract;
 
 namespace TesseractUI
 {
@@ -9,6 +10,7 @@ namespace TesseractUI
         public ProcessingState Status { get; set; }
         public Language ProcessingLanguage { get; set; }
         public bool Process { get; set; }
+        public ObservableCollection<Language> SupportedLanguages { get; set; }
         #endregion
     }
 }

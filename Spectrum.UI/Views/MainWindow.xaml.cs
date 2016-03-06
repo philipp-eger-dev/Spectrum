@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
@@ -22,13 +23,27 @@ namespace TesseractUI
         public readonly FileGridViewModel FileGridVM;
         #endregion
 
+        #region Properties
+        public ObservableCollection<Language> SupportedLanguages { get; private set; }
+        #endregion
+
         #region Constructor
         public MainWindow()
         {
             InitializeComponent();
 
-            TesseractLanguages languages = new TesseractLanguages();
-            languages.GetSupportedLanguagesFromTesseract(new TesseractProgram());
+            DataContext = this;
+
+            try
+            {
+                TesseractLanguages languages = new TesseractLanguages();
+                this.SupportedLanguages = new ObservableCollection<Language>(
+                    languages.GetSupportedLanguagesFromTesseract(new TesseractProgram()));
+            }
+            catch(Exception ex)
+            {
+                
+            }
 
             this.FileGridVM = new FileGridViewModel();
             this.DataContext = this.FileGridVM;
@@ -124,8 +139,8 @@ namespace TesseractUI
                 this.FileGridVM.Files.Add(new FileToProcess()
                 {
                     FilePath = filePath,
-                    ProcessingLanguage = TesseractUI.BusinessLogic.Tesseract.Language.German,
                     Status = ProcessingState.Pending,
+                    SupportedLanguages = this.SupportedLanguages,
                     Process = true
                 });
             }

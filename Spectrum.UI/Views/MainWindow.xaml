@@ -6,6 +6,7 @@
         Title="Spectrum - Searchable PDF Creator" Icon="../Icons/TesseractUI.ico" Height="500" Width="625" MinHeight="400" MinWidth="525">
     <Window.Resources>
         <tesseractUi:TrueToFalseConverter x:Key="TrueToFalseConverter" />
+        <tesseractUi:LanguageEnumToStringConverter x:Key="LanguageEnumToStringConverter" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -50,7 +51,7 @@
                     <DataGridTemplateColumn Header="Language">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <!--<ComboBox  ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectedItem="{Binding ProcessingLanguage, Mode=TwoWay}" />-->
+                                <ComboBox ItemsSource="{Binding SupportedLanguages, Converter={StaticResource LanguageEnumToStringConverter}}"  />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
