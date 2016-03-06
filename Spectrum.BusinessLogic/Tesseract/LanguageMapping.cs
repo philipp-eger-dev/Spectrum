@@ -20,6 +20,22 @@ namespace TesseractUI.BusinessLogic.Tesseract
                     return "eng";
                 case Language.German:
                     return "deu";
+                case Language.Francais:
+                    return "fra";
+                case Language.Italian:
+                    return "ita";
+                case Language.Portugese:
+                    return "por";
+                case Language.Russian:
+                    return "rus";
+                case Language.Spanish:
+                    return "spa";
+                case Language.Swedish:
+                    return "swe";
+                case Language.Indian:
+                    return "ind";
+                case Language.Norwegian:
+                    return "nor";
                 default:
                     throw new Exception("Language not found");
             }

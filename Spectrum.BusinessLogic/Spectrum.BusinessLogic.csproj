@@ -84,6 +84,7 @@
     <Compile Include="Settings.cs" />
     <Compile Include="Tesseract\Language.cs" />
     <Compile Include="Tesseract\LanguageMapping.cs" />
+    <Compile Include="Tesseract\TesseractLanguages.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
